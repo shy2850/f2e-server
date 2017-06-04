@@ -4,27 +4,31 @@ const path = require('path')
 const program = require('commander')
 const base = require('../package.json')
 const IP = require('../lib/util/IP')
-const ROOT = process.pwd();
+const HOSTS = require('../lib/util/HOSTS')
 
 program
     .version(base.version)
-    .option('-p, --port <port>', 'http server port')
 
 program
     .command('start')
+    .option('-p, --port <port>', 'http server port')
+    .option('-host, --host <host>', 'port 80 & set local host')
     .description('启动服务器')
-    .action((options) => {
-        const {
-            port,
-        } = options.parent
-
-        require('../index')({port})
+    .action(options => {
+        require('../index')(options)
     })
 
 program
     .command('ip')
     .description('获取本地IP')
     .action(options => console.log(IP))
+
+program
+    .command('host')
+    .description('加入host映射')
+    .action(options => {
+        HOSTS(options)
+    })
 
 // 开始解析用户输入的命令
 program.parse(process.argv)

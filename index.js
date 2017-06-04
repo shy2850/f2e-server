@@ -1,2 +1,1 @@
-const server = require('./lib/server')
-module.exports = (options) => server.start(options)
+module.exports = require('./lib/server/index')
