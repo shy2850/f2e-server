@@ -8,6 +8,7 @@ yarn-error.log*
 # Runtime data
 pids
 *.cfgcache
+*.f2econfig.js
 *.pid
 *.seed
 *.pid.lock
