@@ -12,7 +12,7 @@ program
 program
     .command('start')
     .option('-p, --port <port>', 'http server port')
-    .option('-host, --host <host>', 'port 80 & set local host')
+    .option('-H, --host <host>', 'port 80 & set local host')
     .description('启动服务器')
     .action(options => {
         require('../index')(options)
