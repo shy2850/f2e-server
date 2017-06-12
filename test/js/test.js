@@ -1,5 +1,5 @@
 let min = 1
 
 setInterval(e => {
-    document.body.innerHTML = min++
+    document.querySelector('h2').innerHTML = min++
 }, 300)
