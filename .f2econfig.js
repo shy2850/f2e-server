@@ -17,6 +17,11 @@ module.exports = {
      */
     useBabel: true,
     /**
+     * 是否支持 gzip
+     * @type {Boolean}
+     */
+    gzip: true,
+    /**
      * 只输出指定条件的资源
      * @param  {string} pathname 资源路径名
      * @param  {Buffer/string} data     资源内容
