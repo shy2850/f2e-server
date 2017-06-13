@@ -54,7 +54,8 @@ module.exports = {
         return !pathname || filter
     },
     /**
-     * 支持中间件列表
+     * 支持中间件列表, 默认添加的系统中间件后面, build之前
+     * 系统中间件顺序 include(0) -> less(1) -> babel(2) ---> build(last)
      * @type {Array}
      */
     middlewares: [
@@ -78,6 +79,26 @@ module.exports = {
                 outputFilter (pathname, data) {
                     // .md 资源开发环境可见， 但是不输出
                     return !/\.md$/.test(pathname)
+                }
+            }
+        },
+        // lodash 模板引擎
+        () => {
+            const _ = require('lodash')
+            return {
+                // 中间件置顶位置 include 之后
+                setBefore: 1,
+                onSet (pathname, data) {
+                    // data 目录下面的文本资源需要经过模板引擎编译
+                    if (pathname.match(/^test[\\/]index/)) {
+                        let str = data.toString()
+                        try {
+                            str = _.template(str)({__dirname, require})
+                        } catch (e) {
+                            console.log(pathname, e)
+                        }
+                        return str
+                    }
                 }
             }
         }

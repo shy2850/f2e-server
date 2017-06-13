@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Test</title>
+	<title><%=__dirname%></title>
 </head>
 <body>
+<%=__dirname%>
 $[placeholder]
 </body>
 </html>
