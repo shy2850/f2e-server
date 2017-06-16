@@ -7,15 +7,19 @@ module.exports = {
      */
     livereload: true,
     /**
-     * 使用 less 编译为css， 默认为true
-     * @type {Boolean}
+     * 使用 less 编译为css, 使用 less 配置
+     * @type {Object}
      */
-    useLess: true,
+    useLess: {
+        compress: false
+    },
     /**
-     * 是否支持babel编译 js/jsx 默认为false, 开启时 需要安装 babel6
-     * @type {Boolean}
+     * 支持babel编译 js/es/jsx, 支持 `.babelrc` 配置, 
+     * @type {Object}
      */
-    useBabel: true,
+    useBabel: {
+        getModuleId: pathname => pathname
+    },
     /**
      * 是否支持 gzip
      * @type {Boolean}
