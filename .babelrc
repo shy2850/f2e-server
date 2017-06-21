@@ -1,5 +1,5 @@
 {
-    "only": ["test/**", "test.*"],
+    "only": ["test/**.jsx"],
     "moduleIds": true,
     "plugins": [
         "babel-plugin-transform-es2015-modules-amd",

@@ -5,9 +5,22 @@ const program = require('commander')
 const base = require('../package.json')
 const IP = require('../lib/util/IP')
 const HOSTS = require('../lib/util/HOSTS')
+const fs = require('fs')
+const F2E_CONFIG = require('../lib/conf/F2E_CONFIG')
 
 program
     .version(base.version)
+
+program
+    .command('conf')
+    .description(`生成 ${F2E_CONFIG} 配置文件模板`)
+    .action(options => {
+        fs.readFile(path.join(__dirname, `../${F2E_CONFIG}`), function (err, data) {
+            fs.writeFile(path.resolve(F2E_CONFIG), data, function (err) {
+                err && console.log(err)
+            })
+        })
+    })
 
 program
     .command('start')
