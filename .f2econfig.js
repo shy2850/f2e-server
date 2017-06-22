@@ -14,7 +14,7 @@ module.exports = {
         compress: false
     },
     /**
-     * 支持babel编译 js/es/jsx, 支持 `.babelrc` 配置, 
+     * 支持babel编译 js/es/jsx, 支持 `.babelrc` 配置,
      * @type {Object}
      */
     useBabel: {
