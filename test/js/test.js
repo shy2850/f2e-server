@@ -1,3 +1,6 @@
+$include['lodash.js'];
+
+console.log(_.keys)
 let min = 1
 
 setInterval(e => {

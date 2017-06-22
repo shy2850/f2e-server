@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+    host: 'f2e.local.cn',
     /**
      * 是否开启自动刷新, 默认为 true
      * @type {Boolean}
@@ -61,6 +62,9 @@ module.exports = {
                 outputFilter (pathname, data) {
                     // .md 资源开发环境可见， 但是不输出
                     return !/\.md$/.test(pathname)
+                },
+                buildWatcher (type, pathname) {
+                    console.log(new Date().toLocaleString(), type, pathname)
                 }
             }
         },

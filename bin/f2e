@@ -21,7 +21,15 @@ program
             })
         })
     })
-
+program
+    .command('build')
+    .option('-w, --watch <watch>', 'build with watching-update')
+    .description('编译输出')
+    .action(options => {
+        require('../lib/util/build')(function () {
+            console.log('build finished!' + (options.watch ? '\n  & building...' : ''))
+        }, options.watch)
+    })
 program
     .command('start')
     .option('-p, --port <port>', 'http server port')
