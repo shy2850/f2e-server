@@ -1,13 +1,14 @@
 {
   "name": "f2e-server",
-  "version": "2.1.1",
+  "version": "2.1.6",
   "description": "f2e-server 2.0",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/f2e start",
     "build": "node ./bin/f2e build",
     "test": "node test/index.js",
-    "lint": "./node_modules/.bin/eslint lib/**/**.js"
+    "lint": "./node_modules/.bin/eslint lib/**/**.js",
+    "prepare": "npm run lint"
   },
   "repository": {
     "type": "git",

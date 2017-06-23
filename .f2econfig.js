@@ -19,7 +19,7 @@ module.exports = {
      * @type {Object}
      */
     useBabel: {
-        getModuleId: pathname => pathname
+        getModuleId: pathname => pathname.replace(/\\+/g, '/')
     },
     /**
      * 是否支持 gzip
@@ -43,7 +43,7 @@ module.exports = {
      * @return {Boolean}
      */
     shouldUseMinify: (pathname, data) => {
-        let ok = data.toString().length < 64 * 1000
+        let ok = data.toString().length < 1024 * 1024
         !ok && console.log('shouldNotUseMinify: ' + pathname)
         return ok
     },
@@ -99,6 +99,20 @@ module.exports = {
                     }
                 }
             }
+        }
+    ],
+    /**
+     * 简单资源打包方案
+     */
+    bundles: [
+        {
+            /**
+             * 满足当前正则匹配，则附加到 `pathname.replace(test, dist)` 资源
+             *  1. dist路径必须能够匹配资源否则无效
+             *  2. test匹配到的资源(除dist外), 不再输出
+             */
+            test: /bundle[\\/].*/,
+            dist: 'test.js'
         }
     ],
     /**

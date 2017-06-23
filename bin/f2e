@@ -26,8 +26,10 @@ program
     .option('-w, --watch <watch>', 'build with watching-update')
     .description('编译输出')
     .action(options => {
+        let beginTime = Date.now() + 1000
+        console.log('build begin...')
         require('../lib/util/build')(function () {
-            console.log('build finished!' + (options.watch ? '\n  & building...' : ''))
+            console.log('build finished' + (options.watch ? '!\n  & building...' : ' with: ' + (Date.now() - beginTime) + 'ms' ))
         }, options.watch)
     })
 program
