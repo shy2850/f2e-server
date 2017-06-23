@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.1.6",
+  "version": "2.2.4",
   "description": "f2e-server 2.0",
   "main": "index.js",
   "scripts": {
