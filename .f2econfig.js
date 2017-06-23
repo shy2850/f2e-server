@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    host: 'f2e.local.cn',
+    // host: 'f2e.local.cn',
     /**
      * 是否开启自动刷新, 默认为 true
      * @type {Boolean}
@@ -37,11 +37,23 @@ module.exports = {
         return !pathname || filter
     },
     /**
+     * build 阶段是否使用 uglify/cleanCSS 进行 minify 操作
+     * @param  {string} pathname 资源路径名
+     * @param  {Buffer/string} data     资源内容
+     * @return {Boolean}
+     */
+    shouldUseMinify: (pathname, data) => {
+        let ok = data.toString().length < 64 * 1000
+        !ok && console.log('shouldNotUseMinify: ' + pathname)
+        return ok
+    },
+    /**
      * 支持中间件列表, 默认添加的系统中间件后面, build之前
      * 系统中间件顺序 include(0) -> less(1) -> babel(2) ---> build(last)
      * @type {Array}
      */
     middlewares: [
+        // marked 编译
         (conf) => {
             // conf 为当前配置
             return {

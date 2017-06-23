@@ -1,12 +1,15 @@
 # f2e-server
-f2e-server 2.0
+f2e-server 2
 
 ## Install
-`npm i -g shy2850/f2e-server`
+`npm i -g f2e-server`
 
 ## Options
 - `f2e -h`
-- `f2e start`
+- `f2e conf` 生成 .f2econfig.js 配置文件 [.f2econfig.js](.f2econfig.js) 的一个clone版本，需要自行修改
+- `f2e build` 构建到 output 目录 (需要在配置文件中配置 output 路径)
+    - `f2e build -w true` 开启构建并监听文件变化输出结果
+- `f2e start` 启动开发服务器
 - `f2e start -h`
     - `f2e start` 从 2850 开始自增检测可以使用的PORT并启动
     - `f2e start -p 8080` 指定端口启动
@@ -15,29 +18,34 @@ f2e-server 2.0
     - `sudo f2e start -H mysite.local -p 8080` 设置本地域名并从指定端口启动
 
 ## Config
-在启动目录的配置文件 `.f2econfig.js`
+`f2e conf` 生成 [.f2econfig.js](.f2econfig.js) 配置文件
 
 ### 基本配置
-中间件目录 [lib/middleware](lib/middleware/)
-```
+
+``` javascript
 const path = require('path')
 
 module.exports = {
+    // host: 'f2e.local.cn',
     /**
      * 是否开启自动刷新, 默认为 true
      * @type {Boolean}
      */
     livereload: true,
     /**
-     * 使用 less 编译为css， 默认为true
-     * @type {Boolean}
+     * 使用 less 编译为css, 使用 less 配置
+     * @type {Object}
      */
-    useLess: true,
+    useLess: {
+        compress: false
+    },
     /**
-     * 是否支持babel编译 js/jsx 默认为false, 开启时 需要安装 babel6
-     * @type {Boolean}
+     * 支持babel编译 js/es/jsx, 支持 `.babelrc` 配置,
+     * @type {Object}
      */
-    useBabel: true,
+    useBabel: {
+        getModuleId: pathname => pathname
+    },
     /**
      * 是否支持 gzip
      * @type {Boolean}
@@ -54,11 +62,23 @@ module.exports = {
         return !pathname || filter
     },
     /**
+     * build 阶段是否使用 uglify/cleanCSS 进行 minify 操作
+     * @param  {string} pathname 资源路径名
+     * @param  {Buffer/string} data     资源内容
+     * @return {Boolean}
+     */
+    shouldUseMinify: (pathname, data) => {
+        let ok = data.toString().length < 64 * 1000
+        !ok && console.log('shouldNotUseMinify: ' + pathname)
+        return ok
+    },
+    /**
      * 支持中间件列表, 默认添加的系统中间件后面, build之前
      * 系统中间件顺序 include(0) -> less(1) -> babel(2) ---> build(last)
      * @type {Array}
      */
     middlewares: [
+        // marked 编译
         (conf) => {
             // conf 为当前配置
             return {
@@ -79,6 +99,9 @@ module.exports = {
                 outputFilter (pathname, data) {
                     // .md 资源开发环境可见， 但是不输出
                     return !/\.md$/.test(pathname)
+                },
+                buildWatcher (type, pathname) {
+                    console.log(new Date().toLocaleString(), type, pathname)
                 }
             }
         },
@@ -109,13 +132,14 @@ module.exports = {
      */
     output: path.resolve(__dirname, '../output')
 }
+
 ```
 
 
 ### app接入
 支持接入 [Koa](http://koajs.com/) 以及 [express](https://expressjs.com/)
 
-```
+``` javascript
 const Koa = require('koa')
 const app = new Koa()
 
