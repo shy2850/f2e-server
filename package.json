@@ -1,7 +1,7 @@
 {
   "name": "f2e-server",
-  "version": "2.2.8",
-  "description": "f2e-server 2.0",
+  "version": "2.3.0",
+  "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/f2e start",

@@ -137,8 +137,8 @@ module.exports = {
              *  1. dist路径必须能够匹配资源否则无效
              *  2. test匹配到的资源(除dist外), 不再输出
              */
-            test: /bundle[\\/].*/,
-            dist: 'test.js'
+            test: /bundle\/(\w+)\/.*\.jsx/,
+            dist: 'bundle/$1/index.js'
         }
     ],
     /**
