@@ -88,7 +88,7 @@ module.exports = {
                 setBefore: 1,
                 onSet (pathname, data) {
                     // data 目录下面的文本资源需要经过模板引擎编译
-                    if (pathname.match(/^test[\\/]index/)) {
+                    if (pathname.match(/^test\/.*.html/)) {
                         let str = data.toString()
                         try {
                             str = _.template(str)({__dirname, require})
