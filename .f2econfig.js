@@ -115,6 +115,7 @@ module.exports = {
             dist: 'test.js'
         }
     ],
+    app: 'static',
     /**
      * 资源数据目录, 未设置的时候 build 中间件不开启
      * @type {local-url}
