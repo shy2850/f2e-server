@@ -25,11 +25,13 @@ f2e-server 2
 ``` javascript
 
 const path = require('path')
+const request = require('request')
 
 module.exports = {
     // host: 'f2e.local.cn',
+    // port: 2850,
     /**
-     * 是否开启自动刷新, 默认为 true
+     * 是否开启自动刷新
      * @type {Boolean}
      */
     livereload: true,
@@ -52,37 +54,44 @@ module.exports = {
      * @type {Boolean}
      */
     gzip: true,
-    /**
-     * 只输出指定条件的资源
-     * @param  {string} pathname 资源路径名
-     * @param  {Buffer/string} data     资源内容
-     * @return {Boolean}
-     */
-    outputFilter: (pathname, data) => {
-        let filter = /lib|test|index|README/.test(pathname)
-        return !pathname || filter
-    },
-    /**
-     * build 阶段是否使用 uglify/cleanCSS 进行 minify 操作
-     * @param  {string} pathname 资源路径名
-     * @param  {Buffer/string} data     资源内容
-     * @return {Boolean}
-     */
-    shouldUseMinify: (pathname, data) => {
-        let ok = data.toString().length < 1024 * 1024
-        !ok && console.log('shouldNotUseMinify: ' + pathname)
-        return ok
-    },
+
     /**
      * 支持中间件列表, 默认添加的系统中间件后面, build之前
-     * 系统中间件顺序 include(0) -> less(1) -> babel(2) ---> build(last)
-     * @type {Array}
+     *
+     * ☆ 重要的
+     * 1. 自定义中间件中所有事件 onXxx 也支持在外面定义， 在组件内更显条理, 而且也方便自己封装插件多处引入
+     * 2. 系统中间件顺序 include(0) -> less(1) -> babel(2) ---> build(last)
+     * 3. 顶层定义的事件顺序在系统中间件之前
+     * @type {Array<Function>}
      */
     middlewares: [
         // marked 编译
         (conf) => {
             // conf 为当前配置
             return {
+                /**
+                 *
+                 * @param {string} pathname 当前资源路径
+                 * @param {Request} req 原生request对象
+                 * @param {Response} resp 原生response对象
+                 * @param {Object} memory 所有目录对应内存结构, get/set等方法调用会被 onSet/onGet 等拦截
+                 */
+                onRoute (pathname, req, resp, memory) {
+                    // 搞一个代理试试
+                    if (pathname.match(/^es6/)) {
+                        request(pathname.replace('es6', 'http://es6.ruanyifeng.com')).pipe(resp)
+                        return false
+                    }
+                },
+                /**
+                 *
+                 * @param {string} eventType 事件类型 change/add/etc.
+                 * @param {string} pathname 当前修改文件的路径
+                 * @param {boolean} build 是否开启了build配置, build模式下可能同时需要触发其他资源修改等
+                 */
+                buildWatcher (eventType, pathname, build) {
+                    console.log(new Date().toLocaleString(), eventType, pathname)
+                },
                 /**
                  * onSet 设置资源内容时候触发
                  * @param  {string} pathname 当前资源路径
@@ -97,12 +106,18 @@ module.exports = {
                         store._set(pathname.replace(/\.md$/, '.html'), res)
                     }
                 },
+                /**
+                 * 跟onSet类似, 开发环境下面，每次请求都会执行, 缩短server启动时间可以把onSet的逻辑扔这里
+                 */
+                onGet(pathname, data, store) {},
+                /**
+                 * 不希望影响构建的操作, 仅在server中触发, 不希望影响构建的操作（例： 自动更新脚本插入）
+                 */
+                onText(pathname, data, req, resp, memory) {},
+                buildFilter(pathname, data) {},
                 outputFilter (pathname, data) {
-                    // .md 资源开发环境可见， 但是不输出
+                    // .md 资源server环境可见， 但是不输出
                     return !/\.md$/.test(pathname)
-                },
-                buildWatcher (type, pathname) {
-                    console.log(new Date().toLocaleString(), type, pathname)
                 }
             }
         },
@@ -114,7 +129,7 @@ module.exports = {
                 setBefore: 1,
                 onSet (pathname, data) {
                     // data 目录下面的文本资源需要经过模板引擎编译
-                    if (pathname.match(/^test[\\/]index/)) {
+                    if (pathname.match(/^test\/.*.html/)) {
                         let str = data.toString()
                         try {
                             str = _.template(str)({__dirname, require})
@@ -128,6 +143,30 @@ module.exports = {
         }
     ],
     /**
+     * 只构建指定条件的资源
+     * @param  {string} pathname 资源路径名
+     * @param  {Buffer/string} data     资源内容
+     * @return {Boolean}
+     */
+    buildFilter: (pathname, data) => {
+        // 路径过滤
+        let nameFilter = !pathname || /lib|test|index|README/.test(pathname)
+        // 资源大小过滤
+        let sizeFilter = !data || data.toString().length < 1024 * 1024
+        return nameFilter && sizeFilter
+    },
+    /**
+     * build 阶段是否使用 uglify/cleanCSS 进行 minify 操作
+     * @param  {string} pathname 资源路径名
+     * @param  {Buffer/string} data     资源内容
+     * @return {Boolean}
+     */
+    shouldUseMinify: (pathname, data) => {
+        let ok = data.toString().length < 1024 * 1024
+        !ok && console.log('shouldNotUseMinify: ' + pathname)
+        return ok
+    },
+    /**
      * 简单资源打包方案
      */
     bundles: [
@@ -137,17 +176,21 @@ module.exports = {
              *  1. dist路径必须能够匹配资源否则无效
              *  2. test匹配到的资源(除dist外), 不再输出
              */
-            test: /bundle\/(\w+)\/.*\.jsx/,
-            dist: 'bundle/$1/index.js'
+            test: /bundle[\\/].*/,
+            dist: 'test.js'
         }
     ],
+    /**
+     * app 默认时候 f2e 构建系统, 支持 'static' 纯静态服务器
+     * 如果 app 自定义, 相当于只是使用 f2e 的端口开启和域名解析功能, 其他所有配置失效
+     */
+    // app: 'static',
     /**
      * 资源数据目录, 未设置的时候 build 中间件不开启
      * @type {local-url}
      */
     output: path.resolve(__dirname, '../output')
 }
-
 
 ```
 
