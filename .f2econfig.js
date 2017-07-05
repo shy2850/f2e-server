@@ -26,6 +26,11 @@ module.exports = {
      * @type {Boolean}
      */
     gzip: true,
+    onSet: (pathname, data) => {
+        if (pathname && data && !Object.prototype.isPrototypeOf(data)) {
+            console.log('build: ' + pathname)
+        }
+    },
     /**
      * 只输出指定条件的资源
      * @param  {string} pathname 资源路径名
