@@ -1,11 +1,11 @@
 {
   "name": "f2e-server",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/f2e start",
-    "build": "node ./bin/f2e build -t 3000",
+    "build": "node ./bin/f2e build",
     "test": "node test/index.js",
     "lint": "./node_modules/.bin/eslint lib/**/**.js",
     "prepare": "npm run lint"

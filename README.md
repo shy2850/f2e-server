@@ -47,7 +47,16 @@ module.exports = {
      * @type {Object}
      */
     useBabel: {
-        getModuleId: pathname => pathname.replace(/\\+/g, '/')
+        getModuleId: pathname => pathname.replace(/\\+/g, '/'),
+        /**
+         * 支持多组babel-option 配置通过 only 参数匹配，匹配到一个，则停止
+         */
+        _rules: [
+            {
+                only: ['number.js'],
+                getModuleId: pathname => 'number',
+            }
+        ]
     },
     /**
      * 是否支持 gzip
