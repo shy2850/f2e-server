@@ -203,6 +203,12 @@ module.exports = {
 
 ```
 
+### 中间件
+参考 [f2e-middleware](https://github.com/shy2850/f2e-middleware) 
+
+1. lodash 模板引擎
+2. markdown 编译
+3. proxy 请求代理配置
 
 ### app接入
 支持接入 [Koa](http://koajs.com/) 以及 [express](https://expressjs.com/)
