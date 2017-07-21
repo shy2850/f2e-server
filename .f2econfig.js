@@ -1,9 +1,5 @@
-const path = require('path')
-const request = require('request')
-
 module.exports = {
     // host: 'f2e.local.cn',
-    // port: 2850,
     /**
      * 是否开启自动刷新
      * @type {Boolean}
@@ -20,18 +16,7 @@ module.exports = {
      * 支持babel编译 js/es/jsx, 支持 `.babelrc` 配置,
      * @type {Object}
      */
-    useBabel: {
-        getModuleId: pathname => pathname.replace(/\\+/g, '/'),
-        /**
-         * 支持多组babel-option 配置通过 only 参数匹配，匹配到一个，则停止
-         */
-        _rules: [
-            {
-                only: ['number.js'],
-                getModuleId: pathname => 'number',
-            }
-        ]
-    },
+    useBabel: true,
     /**
      * 是否支持 gzip
      * @type {Boolean}
@@ -48,81 +33,21 @@ module.exports = {
      * @type {Array<Function>}
      */
     middlewares: [
-        // marked 编译
-        (conf) => {
-            // conf 为当前配置
-            return {
-                /**
-                 *
-                 * @param {string} pathname 当前资源路径
-                 * @param {Request} req 原生request对象
-                 * @param {Response} resp 原生response对象
-                 * @param {Object} memory 所有目录对应内存结构, get/set等方法调用会被 onSet/onGet 等拦截
-                 */
-                onRoute (pathname, req, resp, memory) {
-                    // 搞一个代理试试
-                    if (pathname.match(/^es6/)) {
-                        request(pathname.replace('es6', 'http://es6.ruanyifeng.com')).pipe(resp)
-                        return false
-                    }
-                },
-                /**
-                 *
-                 * @param {string} eventType 事件类型 change/add/etc.
-                 * @param {string} pathname 当前修改文件的路径
-                 * @param {boolean} build 是否开启了build配置, build模式下可能同时需要触发其他资源修改等
-                 */
-                buildWatcher (eventType, pathname, build) {
-                    console.log(new Date().toLocaleString(), eventType, pathname)
-                },
-                /**
-                 * onSet 设置资源内容时候触发
-                 * @param  {string} pathname 当前资源路径
-                 * @param  {string/Buffer} data  上一个流结束时候的数据
-                 * @param  {object} store   数据仓库 {_get, _set}
-                 * @return {string/Buffer}   将要设置的内容
-                 */
-                onSet(pathname, data, store) {
-                    if (pathname.match(/\.md$/)) {
-                        let res = require('marked')(data.toString())
-                        // 在数据仓库中设置一个新的资源 .html
-                        store._set(pathname.replace(/\.md$/, '.html'), res)
-                    }
-                },
-                /**
-                 * 跟onSet类似, 开发环境下面，每次请求都会执行, 缩短server启动时间可以把onSet的逻辑扔这里
-                 */
-                onGet(pathname, data, store) {},
-                /**
-                 * 不希望影响构建的操作, 仅在server中触发, 不希望影响构建的操作（例： 自动更新脚本插入）
-                 */
-                onText(pathname, data, req, resp, memory) {},
-                buildFilter(pathname, data) {},
-                outputFilter (pathname, data) {
-                    // .md 资源server环境可见， 但是不输出
-                    return !/\.md$/.test(pathname)
-                }
-            }
+        /*
+        {
+            test: /^docs/,
+            middleware: 'proxy',
+            url: 'https://f2e-server.com',
+            pathname: ''
         },
-        // lodash 模板引擎
-        () => {
-            const _ = require('lodash')
-            return {
-                // 中间件置顶位置 include 之后
-                setBefore: 1,
-                onSet (pathname, data) {
-                    // data 目录下面的文本资源需要经过模板引擎编译
-                    if (pathname.match(/^test\/.*.html/)) {
-                        let str = data.toString()
-                        try {
-                            str = _.template(str)({__dirname, require})
-                        } catch (e) {
-                            console.log(pathname, e)
-                        }
-                        return str
-                    }
-                }
-            }
+        */
+        
+        {
+            middleware: 'markdown'
+        },
+        {
+            test: /.html$/,
+            middleware: 'template'
         }
     ],
     /**
@@ -133,7 +58,7 @@ module.exports = {
      */
     buildFilter: (pathname, data) => {
         // 路径过滤
-        let nameFilter = !pathname || /lib|test|index|README/.test(pathname)
+        let nameFilter = !pathname || /docs|lib|test|index|README/.test(pathname)
         // 资源大小过滤
         let sizeFilter = !data || data.toString().length < 1024 * 1024
         return nameFilter && sizeFilter
@@ -163,14 +88,6 @@ module.exports = {
             dist: 'test.js'
         }
     ],
-    /**
-     * app 默认时候 f2e 构建系统, 支持 'static' 纯静态服务器
-     * 如果 app 自定义, 相当于只是使用 f2e 的端口开启和域名解析功能, 其他所有配置失效
-     */
     // app: 'static',
-    /**
-     * 资源数据目录, 未设置的时候 build 中间件不开启
-     * @type {local-url}
-     */
-    output: path.resolve(__dirname, '../output')
+    output: require('path').join(__dirname, '../output')
 }
