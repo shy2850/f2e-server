@@ -38,6 +38,7 @@ program
     .command('start')
     .option('-p, --port <port>', 'http server port')
     .option('-H, --host <host>', 'port 80 & set local host')
+    .option('-B, --build <build>', 'build with true')
     .description('启动服务器')
     .action(options => {
         require('../index')(options)
