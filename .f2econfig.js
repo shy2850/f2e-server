@@ -21,7 +21,7 @@ module.exports = {
      * 是否支持 gzip
      * @type {Boolean}
      */
-    gzip: true,
+    // gzip: true,
 
     /**
      * 支持中间件列表, 默认添加的系统中间件后面, build之前
@@ -41,7 +41,7 @@ module.exports = {
             pathname: ''
         },
         */
-        
+
         {
             middleware: 'markdown'
         },
@@ -88,6 +88,6 @@ module.exports = {
             dist: 'test.js'
         }
     ],
-    // app: 'static',
+    app: 'static',
     output: require('path').join(__dirname, '../output')
 }
