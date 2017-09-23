@@ -209,6 +209,8 @@ module.exports = {
 1. lodash 模板引擎
 2. markdown 编译
 3. proxy 请求代理配置
+4. dest 构建资源输出重命名
+5. qrcode 简单二维码生成器
 
 ### app接入
 支持接入 [Koa](http://koajs.com/) 以及 [express](https://expressjs.com/)
