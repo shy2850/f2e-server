@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.6.5",
+  "version": "2.6.6",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
@@ -54,7 +54,7 @@
     "f2e-middle-template": "^0.2.5",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
-    "memory-tree": "^0.4.3",
+    "memory-tree": "^0.4.4",
     "mime": "^1.4.1",
     "tcp-port-used": "^0.1.2",
     "uglify-js": "^3.1.9"
