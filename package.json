@@ -1,0 +1,41 @@
+{
+  "name": "f2e-blog",
+  "version": "0.1.0",
+  "description": "blog template build by f2e-server",
+  "main": "index.js",
+  "scripts": {
+    "install": "sh ./install.sh",
+    "tsc": "tsc",
+    "lint": "tslint lib/**",
+    "start": "f2e start",
+    "build": "f2e build",
+    "deploy": "sh ./deploy.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shy2850/f2e-blog.git"
+  },
+  "author": "shy2850",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shy2850/f2e-blog/issues"
+  },
+  "homepage": "https://github.com/shy2850/f2e-blog#readme",
+  "dependencies": {
+    "@types/node": "^8.0.53",
+    "bulma": "^0.6.1",
+    "f2e-middle-typescript": "^0.2.2",
+    "f2e-server": "^2.6.4",
+    "font-awesome": "^4.7.0",
+    "highlight.js": "^9.12.0",
+    "marked": "^0.3.6",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-router-dom": "^4.2.2",
+    "requirejs": "^2.3.5",
+    "tslint": "^5.8.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.6.1"
+  }
+}

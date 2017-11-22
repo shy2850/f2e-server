@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "pretty": true,
+        "jsx": "react",
+        "target": "ES6"
+    },
+    "include": [
+        "lib/*.ts",
+        "lib/*.tsx",
+        "lib/**/*.ts",
+        "lib/**/*.tsx"
+    ]
+}
