@@ -7,7 +7,8 @@ module.exports = {
     // app: 'static',
     middlewares: [
         {
-            middleware: 'template'
+            middleware: 'template',
+            test: /index\.html?/
         }
     ],
     output: require('path').join(__dirname, '../f2e-output')

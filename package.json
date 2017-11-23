@@ -1,13 +1,13 @@
 {
   "name": "f2e-server",
-  "version": "2.6.8",
+  "version": "2.7.0",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/f2e start",
     "build": "node ./bin/f2e build",
     "test": "node test/index.js",
-    "lint": "eslint lib/**/**.js",
+    "lint": "eslint {lib/**/,serve/,serve/**/}**.js",
     "prepare": "npm run lint"
   },
   "repository": {
@@ -51,10 +51,9 @@
     "clean-css": "^4.1.9",
     "commander": "^2.11.0",
     "etag": "^1.8.1",
-    "f2e-middle-template": "^0.2.5",
+    "f2e-middle-template": "*",
     "lodash": "^4.17.4",
-    "marked": "^0.3.6",
-    "memory-tree": "^0.4.4",
+    "memory-tree": "*",
     "mime": "^1.4.1",
     "tcp-port-used": "^0.1.2",
     "uglify-js": "^3.1.9"
