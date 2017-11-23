@@ -7,13 +7,7 @@ const middlewares = {
 }
 
 Object.assign(server, {
-    middlewares,
-    Route: require('./serve/Route'),
-    out: {
-        JsonOut: require('./serve/out/JsonOut'),
-        JsonpOut: require('./serve/out/JsonpOut'),
-        ServerSent: require('./serve/out/ServerSent')
-    }
+    middlewares
 })
 
 module.exports = server

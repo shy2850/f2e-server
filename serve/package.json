@@ -1,0 +1,22 @@
+{
+  "name": "f2e-serve",
+  "version": "0.1.0",
+  "description": "serve utils for f2e-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shy2850/f2e-server.git"
+  },
+  "keywords": [
+    "f2e-server"
+  ],
+  "author": "shy2850",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shy2850/f2e-server/issues"
+  },
+  "homepage": "https://github.com/shy2850/f2e-server#readme"
+}
