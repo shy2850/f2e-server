@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.8.2",
+  "version": "2.8.10",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "babel-preset-react": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-node": "^4.2.3",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
@@ -49,13 +49,13 @@
   "dependencies": {
     "chokidar": "^1.7.0",
     "clean-css": "^4.1.9",
-    "commander": "^2.13.0",
+    "commander": "^2.14.1",
     "etag": "^1.8.1",
     "f2e-middle-template": "*",
-    "lodash": "^4.17.4",
-    "memory-tree": "^0.4.8",
+    "lodash": "^4.17.5",
+    "memory-tree": "^0.6.1",
     "mime": "^1.6.0",
     "tcp-port-used": "^0.1.2",
-    "uglify-js": "^3.3.7"
+    "uglify-js": "^3.3.12"
   }
 }

@@ -4,11 +4,11 @@ module.exports = {
     livereload: !build,
     build,
     gzip: true,
-    // app: 'static',
+    useLess: true,
     middlewares: [
         {
             middleware: 'template',
-            test: /index\.html?/
+            test: /\.html?/
         }
     ],
     output: require('path').join(__dirname, '../f2e-output')
