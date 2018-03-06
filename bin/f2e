@@ -7,6 +7,7 @@ const IP = require('../lib/util/IP')
 const HOSTS = require('../lib/util/HOSTS')
 const fs = require('fs')
 const F2E_CONFIG = require('../lib/conf/F2E_CONFIG')
+const { execSync } = require('child_process')
 
 program
     .version(base.version)
@@ -56,5 +57,11 @@ program
         HOSTS(options)
     })
 
+program
+    .command('create')
+    .description('创建单页App')
+    .action(appname => {
+        execSync(`git clone https://github.com/shy2850/create-ipreact-app ${appname} && rm -rf ${appname}/.git`)
+    })
 // 开始解析用户输入的命令
 program.parse(process.argv)
