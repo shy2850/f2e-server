@@ -56,7 +56,7 @@ export interface Middleware extends F2Events{
     /**
      * turn of middle to execute
      */
-    setBefore: number
+    setBefore?: number
 }
 export interface MiddlewareCreater {
     (conf: F2EConfig): Middleware
