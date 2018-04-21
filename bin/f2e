@@ -61,7 +61,7 @@ program
     .command('create')
     .description('创建单页App')
     .action(appname => {
-        execSync(`git clone https://github.com/shy2850/create-ipreact-app ${appname} && rm -rf ${appname}/.git`)
+        execSync(`mkdir ${appname} && cd ${appname} && curl -o- https://raw.githubusercontent.com/shy2850/create-f2e-app/master/init.sh | bash`)
     })
 // 开始解析用户输入的命令
 program.parse(process.argv)
