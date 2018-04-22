@@ -9,15 +9,6 @@ module.exports = (fn, conf = {}) => (req, resp) => {
         out = data => resp.end(zlib.gzipSync(JSON.stringify(data)))
     }
     resp.writeHead(200, header)
-    const res = fn(req, resp, conf)
-    if (res instanceof Promise) {
-        res.then(data => {
-            out(data)
-        }).catch(e => {
-            out(e)
-        })
-    } else {
-        out(res)
-    }
+    Promise.resolve(fn(req, resp, conf)).then(out).catch(out)
     return false
 }
