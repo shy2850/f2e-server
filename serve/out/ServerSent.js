@@ -8,7 +8,9 @@ module.exports = (fn, conf = {
     })
     let interval = setInterval(() => {
         const res = fn(req, resp, conf)
-        resp.write(`data:${JSON.stringify(res)}\n\n`)
+        if (res) {
+            resp.write(`data:${JSON.stringify(res)}\n\n`)
+        }
     }, conf.interval || 1000)
     req.connection.addListener('close', () => {
         resp.end()

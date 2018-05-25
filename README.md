@@ -63,7 +63,11 @@ module.exports = {
      * @type {Boolean}
      */
     gzip: true,
-
+    /**
+     * Range 默认大小
+     * @type {Number}
+     */
+    range_size: 1024 * 1024,
     /**
      * 支持中间件列表, 默认添加的系统中间件后面, build之前
      *

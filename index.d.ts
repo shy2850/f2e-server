@@ -79,6 +79,7 @@ export interface F2EConfig extends F2Events{
     livereload?: boolean
     build?: boolean
     gzip?: boolean
+    range_size?: number
     useLess?: boolean | LessConfig
     useBabel?: boolean | BabelConfig
     middlewares: (MiddlewareCreater | MiddlewareRef)[]

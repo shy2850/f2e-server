@@ -8,6 +8,8 @@ const test = (reg, str) => {
 module.exports = class {
     constructor () {
         this.routes = []
+        this.execute = this.execute.bind(this)
+        this.on = this.on.bind(this)
     }
     execute (pathname, req, resp, memory) {
         const {routes} = this
