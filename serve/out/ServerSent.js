@@ -6,15 +6,21 @@ module.exports = (fn, conf = {
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive'
     })
-    let interval = setInterval(() => {
+
+    const loop = function loop () {
         const res = fn(req, resp, conf)
         if (res) {
             resp.write(`data:${JSON.stringify(res)}\n\n`)
         }
-    }, conf.interval || 1000)
+        setTimeout(loop, conf.interval || 1000)
+    }
+
     req.connection.addListener('close', () => {
         resp.end()
-        clearInterval(interval)
     }, false)
+
+    if (conf.interval !== 0) {
+        loop()
+    }
     return false
 }

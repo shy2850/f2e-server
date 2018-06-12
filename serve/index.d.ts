@@ -12,6 +12,13 @@ export interface ExecOut {
     (fn: Callback, conf?: F2EConfig): ExecFn
 }
 
+export interface ServerSentConfig extends F2EConfig {
+    interval?: number
+}
+export interface ServerSentOut {
+    (fn: Callback, conf?: ServerSentConfig): ExecFn
+} 
+
 export interface Out {
     JsonOut: ExecOut,
     JsonpOut: ExecOut,

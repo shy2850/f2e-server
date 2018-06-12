@@ -3,7 +3,7 @@ const middlewares = {
     babel: require('./lib/middleware/babel'),
     include: require('./lib/middleware/include'),
     less: require('./lib/middleware/less'),
-    livereload: require('./lib/middleware/ServerSent')
+    livereload: require('./lib/middleware/livereload')
 }
 
 Object.assign(server, {
