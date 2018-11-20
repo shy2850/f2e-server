@@ -29,6 +29,10 @@ const request = require('request')
 
 module.exports = {
     // host: 'f2e.local.cn',
+    /**
+     * 不启用 host 识别，只根据端口处理
+     */
+    no_host: false,
     // port: 2850,
     /**
      * 是否开启自动刷新
