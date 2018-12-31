@@ -8,8 +8,10 @@ module.exports = (fn, conf = {
     })
 
     const heart_beat = function heart_beat() {
-        resp.write(`data:1\n\n`)
-        setTimeout(heart_beat, 100000)
+        if (resp.writable && !resp.finished) {
+            resp.write(`data:1\n\n`)
+            setTimeout(heart_beat, 100000)
+        }
     }
 
     const loop = function loop () {
