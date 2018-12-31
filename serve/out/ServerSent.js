@@ -7,20 +7,26 @@ module.exports = (fn, conf = {
         'Connection': 'keep-alive'
     })
 
+    const heart_beat = function heart_beat() {
+        resp.write(`data:1\n\n`)
+        setTimeout(heart_beat, 100000)
+    }
+
     const loop = function loop () {
         const res = fn(req, resp, conf)
         if (res) {
             resp.write(`data:${JSON.stringify(res)}\n\n`)
         }
-        setTimeout(loop, conf.interval || 1000)
+        if (conf.interval) {
+            setTimeout(loop, conf.interval)
+        } else {
+            heart_beat()
+        }
     }
 
     req.connection.addListener('close', () => {
         resp.end()
     }, false)
-
-    if (conf.interval !== 0) {
-        loop()
-    }
+    loop()
     return false
 }

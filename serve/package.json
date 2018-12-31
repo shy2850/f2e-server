@@ -1,6 +1,6 @@
 {
   "name": "f2e-serve",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "serve utils for f2e-server",
   "main": "index.js",
   "scripts": {
