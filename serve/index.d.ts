@@ -22,7 +22,7 @@ export interface ServerSentOut {
 export interface Out {
     JsonOut: ExecOut,
     JsonpOut: ExecOut,
-    ServerSent: ExecOut
+    ServerSent: ServerSentOut
 }
 
 export class Route {
