@@ -19,7 +19,7 @@ module.exports = (fn, conf = {
 
     const loop = function loop () {
         const res = fn(req, resp, conf)
-        if (res && res.writable && !resp.finished) {
+        if (res && resp.writable && !resp.finished) {
             resp.write(`data:${JSON.stringify(res)}\n\n`)
         }
         if (conf.interval) {
