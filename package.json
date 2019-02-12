@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.9.15",
+  "version": "2.9.16",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "node ./bin/f2e build",
     "test": "node test/index.js",
     "lint": "eslint {lib/**/,serve/,serve/**/}**.js",
-    "prepare": "npm run lint"
+    "prepublish": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -32,8 +32,8 @@
   "typings": "index.d.ts",
   "homepage": "https://github.com/shy2850/f2e-server#readme",
   "devDependencies": {
-    "@types/node": "^7.0.60",
-    "babel-core": "^6.26.0",
+    "@types/node": "^7.10.2",
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-modules-amd": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -41,23 +41,23 @@
     "babel-preset-react": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^4.2.3",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "request": "^2.85.0"
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "marked": "^0.6.0"
   },
   "dependencies": {
     "chokidar": "^1.7.0",
-    "clean-css": "^4.1.11",
-    "commander": "^2.15.1",
+    "clean-css": "^4.2.1",
+    "commander": "^2.19.0",
     "etag": "^1.8.1",
     "f2e-middle-template": "*",
     "less": "^2.7.3",
-    "lodash": "^4.17.5",
-    "memory-tree": "^0.6.4",
+    "lodash": "^4.17.11",
+    "memory-tree": "*",
     "mime": "^1.6.0",
     "tcp-port-used": "^0.1.2",
-    "uglify-js": "^3.3.20"
+    "uglify-js": "^3.4.9"
   }
 }

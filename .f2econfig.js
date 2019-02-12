@@ -1,15 +1,20 @@
 const { argv } = process
 const build = argv[argv.length - 1] === 'build'
+const { join } = require('path')
+const { readFileSync } = require('fs')
+const marked = require('marked')
+
 module.exports = {
+    root: join(__dirname, './pages'),
     livereload: !build,
     build,
     gzip: true,
     useLess: true,
+    onRoute: p => {
+        if (!p) return 'index.html'
+    },
     middlewares: [
-        {
-            middleware: 'template',
-            test: /\.html?/
-        }
+        {middleware: 'template'}
     ],
-    output: require('path').join(__dirname, '../f2e-output')
+    output: join(__dirname, './docs')
 }

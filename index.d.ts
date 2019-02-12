@@ -69,11 +69,16 @@ export interface MiddlewareRef {
      */
     middleware: string
     /**
+     * turn of middle to execute
+     */
+    setBefore?: number
+    /**
      * support muti options for any middlewares
      */
     [x:string]: any
 }
 export interface F2EConfig extends F2Events{
+    root?: string
     port?: number
     host?: string
     livereload?: boolean

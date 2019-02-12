@@ -10,22 +10,22 @@ module.exports = (fn, conf = {
     let interval1
     let interval2
 
-    const heart_beat = function heart_beat() {
+    const heartBeat = function heartBeat () {
         if (resp.writable && !resp.finished) {
             resp.write(`data:1\n\n`)
-            interval1 = setTimeout(heart_beat, 100000)
+            interval1 = setTimeout(heartBeat, 100000)
         }
     }
 
-    const loop = function loop () {
-        const res = fn(req, resp, conf)
+    const loop = async function loop () {
+        const res = await Promise.resolve(fn(req, resp, conf))
         if (res && resp.writable && !resp.finished) {
             resp.write(`data:${JSON.stringify(res)}\n\n`)
         }
         if (conf.interval) {
             interval2 = setTimeout(loop, conf.interval)
         } else {
-            heart_beat()
+            heartBeat()
         }
     }
 
