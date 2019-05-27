@@ -3,16 +3,16 @@ import { F2EConfig } from 'f2e-server'
 import "memory-tree"
 
 export interface ExecFn {
-    (req: IncomingMessage, resp: ServerResponse): any | Promise<any>
+    (req: IncomingMessage, resp: ServerResponse): string | false | void
 }
-export interface Callback {
-    (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): any | Promise<any>
+export interface Callback<T extends Object = {}> {
+    (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): T | Promise<T>
 }
 export interface ExecOut {
-    (fn: Callback, conf?: F2EConfig): ExecFn
+    (fn: Callback, conf?: Partial<F2EConfig>): ExecFn
 }
 
-export interface ServerSentConfig extends F2EConfig {
+export interface ServerSentConfig extends Partial<F2EConfig> {
     interval?: number
 }
 export interface ServerSentOut {
@@ -30,7 +30,7 @@ export class Route {
         (pathname: string, req: IncomingMessage, res: ServerResponse, memory: MemoryTree.Store): false | string
     }
     on: {
-        (reg: string | RegExp, exec): void
+        (reg: string | RegExp, exec: ExecFn): void
     }
 }
 export declare const out: Out
