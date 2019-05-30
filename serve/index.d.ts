@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http"
 import { F2EConfig } from 'f2e-server'
-import "memory-tree"
+import { MemoryTree } from "memory-tree"
 
 export interface ExecFn {
     (req: IncomingMessage, resp: ServerResponse): string | false | void

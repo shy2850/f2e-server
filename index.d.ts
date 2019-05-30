@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from "http"
-import "memory-tree"
+import { MemoryTree } from "memory-tree"
 
 type LessConfig = any
 type BabelConfig = any
