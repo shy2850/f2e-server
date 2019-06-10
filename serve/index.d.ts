@@ -3,7 +3,7 @@ import { F2EConfig } from 'f2e-server'
 import { MemoryTree } from "memory-tree"
 
 export interface ExecFn {
-    (req: IncomingMessage, resp: ServerResponse): string | boolean | void
+    (req: IncomingMessage, resp: ServerResponse): string | false
 }
 export interface Callback<T extends Object = {}> {
     (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): T | Promise<T>
@@ -27,7 +27,7 @@ export interface Out {
 
 export class Route {
     execute: {
-        (pathname: string, req: IncomingMessage, res: ServerResponse, memory: MemoryTree.Store): boolean | string
+        (pathname: string, req: IncomingMessage, res: ServerResponse, memory: MemoryTree.Store): string | false
     }
     on: {
         (reg: string | RegExp, exec: ExecFn): void
