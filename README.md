@@ -206,7 +206,18 @@ module.exports = {
      * 资源数据目录, 未设置的时候 build 中间件不开启
      * @type {local-url}
      */
-    output: path.resolve(__dirname, '../output')
+    output: path.resolve(__dirname, '../output'),
+    /**
+     * after server create
+     * you can render websocket server via this
+     */
+    onServerCreate: (server) => {
+        const { Server } = require('ws')
+        const wss = new Server({server});
+        wss.on('connection', (socket) => {
+            socket.send('init')
+        })
+    }
 }
 
 ```
