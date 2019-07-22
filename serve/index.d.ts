@@ -8,21 +8,19 @@ export interface ExecFn {
 export interface Callback<T extends Object = {}> {
     (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): T | Promise<T>
 }
-export interface ExecOut {
-    (fn: Callback, conf?: Partial<F2EConfig>): ExecFn
-}
-
-export interface ServerSentConfig extends Partial<F2EConfig> {
+export interface BaseOutConfig extends Partial<F2EConfig> {
     interval?: number
+    
 }
-export interface ServerSentOut {
-    (fn: Callback, conf?: ServerSentConfig): ExecFn
-} 
+export interface ExecOut {
+    (fn: Callback, conf?: BaseOutConfig): ExecFn
+}
 
 export interface Out {
-    JsonOut: ExecOut,
-    JsonpOut: ExecOut,
-    ServerSent: ServerSentOut
+    Base: (type: string) => ExecOut
+    JsonOut: ExecOut
+    JsonpOut: ExecOut
+    ServerSent: ExecOut
 }
 
 export class Route {
