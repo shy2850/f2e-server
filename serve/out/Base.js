@@ -1,13 +1,10 @@
 const zlib = require('zlib')
 const mime = require('mime')
 
-
 module.exports = (type = 'text/html') => {
     const mimeType = mime.lookup(type) || type
     const isText = !!mime.charsets.lookup(mimeType, false)
-
     return (fn, conf = {}) => (req, resp) => {
-
         let out = data => resp.end(data)
         let header = {
             'Content-Type': mimeType + (isText ? '; charset=utf-8' : '')

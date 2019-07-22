@@ -98,7 +98,7 @@ export interface F2EConfig extends F2Events{
     useLess?: boolean | LessConfig
     useBabel?: boolean | BabelConfig
     middlewares: (MiddlewareCreater | MiddlewareRef)[]
-    output: string
+    output?: string
     /**
      * after server create
      * you can render websocket server via this
