@@ -97,13 +97,13 @@ export interface F2EConfig extends F2Events{
     range_size?: number
     useLess?: boolean | LessConfig
     useBabel?: boolean | BabelConfig
-    middlewares: (MiddlewareCreater | MiddlewareRef)[]
+    middlewares?: (MiddlewareCreater | MiddlewareRef)[]
     output?: string
     /**
      * after server create
      * you can render websocket server via this
      */
-    onServerCreate: (server: net.Server) => void
+    onServerCreate?: (server: net.Server) => void
 }
 
 export const config: F2EConfig

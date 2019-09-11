@@ -1,8 +1,13 @@
+// import { F2EConfig } from 'f2e-server'
+
 const { argv } = process
-const build = argv[argv.length - 1] === 'build'
+const build = process.env['NODE_ENV'] === 'build' || argv[argv.length - 1] === 'build'
 const { join } = require('path')
 
-module.exports = {
+/**
+ * @type F2EConfig
+ */
+const config = {
     livereload: !build,
     build,
     gzip: true,
@@ -12,12 +17,12 @@ module.exports = {
         () => {
             return {
                 onRoute: p => {
-                    if (!p) return 'pages/index.html'
+                    if (!p) return 'index.html'
                 },
             }
         }
     ],
-    output: join(__dirname, './docs'),
+    output: join(__dirname, './output'),
     // onServerCreate: (server) => {
     //     const { Server } = require('ws')
     //     const wss = new Server({server});
@@ -26,3 +31,4 @@ module.exports = {
     //     })
     // }
 }
+module.exports = config
