@@ -7,20 +7,33 @@ module.exports = (fn, conf = {
         'Connection': 'keep-alive'
     })
 
-    const loop = function loop () {
-        const res = fn(req, resp, conf)
-        if (res) {
+    let interval1
+    let interval2
+
+    const heartBeat = function heartBeat () {
+        if (resp.writable && !resp.finished) {
+            resp.write(`data:1\n\n`)
+            interval1 = setTimeout(heartBeat, 100000)
+        }
+    }
+
+    const loop = async function loop () {
+        const res = await Promise.resolve(fn(req, resp, conf))
+        if (res && resp.writable && !resp.finished) {
             resp.write(`data:${JSON.stringify(res)}\n\n`)
         }
-        setTimeout(loop, conf.interval || 1000)
+        if (conf.interval) {
+            interval2 = setTimeout(loop, conf.interval)
+        } else {
+            heartBeat()
+        }
     }
 
     req.connection.addListener('close', () => {
+        clearTimeout(interval1)
+        clearTimeout(interval2)
         resp.end()
     }, false)
-
-    if (conf.interval !== 0) {
-        loop()
-    }
+    loop()
     return false
 }

@@ -1,36 +1,34 @@
 import { IncomingMessage, ServerResponse } from "http"
 import { F2EConfig } from 'f2e-server'
-import "memory-tree"
+import { MemoryTree } from "memory-tree"
 
 export interface ExecFn {
-    (req: IncomingMessage, resp: ServerResponse): any | Promise<any>
+    (req: IncomingMessage, resp: ServerResponse): any
 }
-export interface Callback {
-    (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): any | Promise<any>
+export interface Callback<T extends Object = {}> {
+    (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): T | Promise<T>
+}
+export interface BaseOutConfig extends Partial<F2EConfig> {
+    interval?: number
+    
 }
 export interface ExecOut {
-    (fn: Callback, conf?: F2EConfig): ExecFn
+    (fn: Callback, conf?: BaseOutConfig): ExecFn
 }
-
-export interface ServerSentConfig extends F2EConfig {
-    interval?: number
-}
-export interface ServerSentOut {
-    (fn: Callback, conf?: ServerSentConfig): ExecFn
-} 
 
 export interface Out {
-    JsonOut: ExecOut,
-    JsonpOut: ExecOut,
+    Base: (type: string) => ExecOut
+    JsonOut: ExecOut
+    JsonpOut: ExecOut
     ServerSent: ExecOut
 }
 
 export class Route {
     execute: {
-        (pathname: string, req: IncomingMessage, res: ServerResponse, memory: MemoryTree.Store): false | string
+        (pathname: string, req: IncomingMessage, res: ServerResponse, memory: MemoryTree.Store): any
     }
     on: {
-        (reg: string | RegExp, exec): void
+        (reg: string | RegExp, exec: ExecFn): void
     }
 }
 export declare const out: Out

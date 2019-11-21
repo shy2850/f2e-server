@@ -1,6 +1,6 @@
 {
   "name": "f2e-serve",
-  "version": "0.2.4",
+  "version": "0.4.3",
   "description": "serve utils for f2e-server",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/shy2850/f2e-server#readme",
   "dependencies": {
     "@types/node": "^10.0.4",
-    "f2e-server": "*"
+    "f2e-server": "*",
+    "mime": "^2.4.4"
   }
 }

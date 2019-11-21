@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http"
-import "memory-tree"
+import { MemoryTree } from "memory-tree"
+import * as net from 'net'
 
 type LessConfig = any
 type BabelConfig = any
@@ -69,19 +70,40 @@ export interface MiddlewareRef {
      */
     middleware: string
     /**
+     * turn of middle to execute
+     */
+    setBefore?: number
+    /**
      * support muti options for any middlewares
      */
     [x:string]: any
 }
+
+
 export interface F2EConfig extends F2Events{
+    root?: string
     port?: number
     host?: string
+    /**
+     * no host valid
+     */
+    no_host?: boolean
     livereload?: boolean
     build?: boolean
     gzip?: boolean
+    /**
+     * stream data output size per response
+     */
     range_size?: number
     useLess?: boolean | LessConfig
     useBabel?: boolean | BabelConfig
-    middlewares: (MiddlewareCreater | MiddlewareRef)[]
-    output: string
+    middlewares?: (MiddlewareCreater | MiddlewareRef)[]
+    output?: string
+    /**
+     * after server create
+     * you can render websocket server via this
+     */
+    onServerCreate?: (server: net.Server) => void
 }
+
+export const config: F2EConfig

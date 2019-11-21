@@ -29,6 +29,10 @@ const request = require('request')
 
 module.exports = {
     // host: 'f2e.local.cn',
+    /**
+     * 不启用 host 识别，只根据端口处理
+     */
+    no_host: false,
     // port: 2850,
     /**
      * 是否开启自动刷新
@@ -202,7 +206,18 @@ module.exports = {
      * 资源数据目录, 未设置的时候 build 中间件不开启
      * @type {local-url}
      */
-    output: path.resolve(__dirname, '../output')
+    output: path.resolve(__dirname, '../output'),
+    /**
+     * after server create
+     * you can render websocket server via this
+     */
+    onServerCreate: (server) => {
+        const { Server } = require('ws')
+        const wss = new Server({server});
+        wss.on('connection', (socket) => {
+            socket.send('init')
+        })
+    }
 }
 
 ```
