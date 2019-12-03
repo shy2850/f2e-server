@@ -12,6 +12,7 @@ f2e-server 2
 - `f2e start` 启动开发服务器
 - `f2e start -h`
     - `f2e start` 从 2850 开始自增检测可以使用的PORT并启动
+    - `f2e start -c .f2econfig.js` 指定配置文件
     - `f2e start -p 8080` 指定端口启动
     - `sudo f2e start -p 443` 开启HTTPS支持
     - `sudo f2e start -H mysite.local` 设置本地域名并从80端口启动

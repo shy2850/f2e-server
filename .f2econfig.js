@@ -13,14 +13,14 @@ const config = {
     gzip: true,
     useLess: true,
     middlewares: [
-        {middleware: 'template'},
-        () => {
-            return {
-                onRoute: p => {
-                    if (!p) return 'index.html'
-                },
-            }
-        }
+        { middleware: 'template', test: /\.html?/ },
+        // () => {
+        //     return {
+        //         onRoute: p => {
+        //             if (!p) return 'index.html'
+        //         },
+        //     }
+        // }
     ],
     output: join(__dirname, './output'),
     // onServerCreate: (server) => {
