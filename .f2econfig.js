@@ -1,17 +1,18 @@
-// import { F2EConfig } from 'f2e-server'
+// @ts-check
 
 const { argv } = process
 const build = process.env['NODE_ENV'] === 'build' || argv[argv.length - 1] === 'build'
 const { join } = require('path')
 
 /**
- * @type F2EConfig
+ * @type {import('./index').F2EConfig}
  */
 const config = {
     livereload: !build,
     build,
     gzip: true,
     useLess: true,
+    buildFilter: p => !/output/.test(p),
     middlewares: [
         { middleware: 'template', test: /\.html?/ },
         // () => {
