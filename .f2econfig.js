@@ -12,7 +12,6 @@ const config = {
     build,
     gzip: true,
     useLess: true,
-    buildFilter: p => !/output/.test(p),
     middlewares: [
         { middleware: 'template', test: /\.html?/ },
         // () => {

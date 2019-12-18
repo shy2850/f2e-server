@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v2.12.0
+- 支持 `page` 相关配置
+  - page_404
+  - page_50x
+  - page_dir
+- 移除 `onDirectory` 配置
+
 ## v2.11.0
 - 支持指定配置文件 命令 `f2e start -c [.f2econfig.js文件相对路径]`
 - build模式对js、css后缀文件 不生效严重BUG修复
