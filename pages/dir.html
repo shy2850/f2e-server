@@ -5,11 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%=pathname%>/</title>
+    <style>
+        body { min-height: 90vh; }
+        ul li a { margin-right: 20px; }
+        ul li.candel:focus:after { font-size: 13px; content: ' Del按键/鼠标双击 删除文件'; }
+        .contextmenu { position: absolute; display: none; background: #fff; box-shadow: 3px 3px 15px #999; }
+        .contextmenu > a { display: block; padding: 5px 12px; line-height: 20px; }
+        .info-bar { position: fixed; left: 1rem; bottom: 1rem; }
+    </style>
 </head>
 <body>
 <ul>
     <li><a href="../">../</a></li>
-<%=Object.keys(store).sort().map(k => `    <li><a href="${pathname}/${k}">${k}</a></li>`).join('\n')%>
+<%=Object.keys(store).sort().map(k => `    <li tabindex="1"><a href="${pathname}/${k}">${k}</a></li>`).join('\n')%>
 </ul>
+
+<% if (conf.authorization) { %>
+<div class="info-bar">本页面支持拖拽上传文件(仅支持单文件,不支持文件夹)</div>
+<div class="contextmenu">
+    <a href="javascript:;" class="new_folder">新建文件夹</a>
+</div>
+<script>
+
+    const list = document.querySelectorAll('ul li[tabindex="1"]')
+    const Fetch = (url, option) => fetch(url, option).then(res => {
+        if (res.status === 500) {
+            res.text().then(err => {
+                const div = document.createElement('div')
+                div.innerHTML = err
+                alert(div.innerText)
+            })
+        }
+    })
+    list.forEach(el => {
+        const file = el.innerText.trim()
+        el.classList.add('candel')
+        el.addEventListener('keyup', e => {
+            switch(e.keyCode) {
+                case 8: confirm('确定删除' + file) && Fetch('?file=' + file, { method: 'DELETE' });
+            }
+        })
+        el.addEventListener('dblclick', function () {
+            confirm('确定删除' + file) && Fetch('?file=' + file, { method: 'DELETE' });
+        })
+    })
+    document.body.addEventListener('drop', function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        const file = e.dataTransfer.files[0]
+        Fetch('?file=' + file.name, {
+            method: 'PUT',
+            body: file
+        })
+    })
+    document.body.addEventListener('dragover', function (e) {
+        e.preventDefault()
+    })
+
+    const contextmenu = document.querySelector('.contextmenu')
+    document.body.addEventListener('click', function (e) {
+        if (e.target === contextmenu || contextmenu.contains(e.target)) {
+            const item = e.target
+            switch (item.className) {
+                case 'new_folder':
+                    contextmenu.style.cssText = ''
+                    setTimeout(() => {
+                        const file = prompt('请输入文件夹名称')
+                        file && Fetch('?file=' + file, { method: 'POST' }).then(() => location.reload())
+                    }, 100);
+                    break;
+            }
+        } else {
+            contextmenu.style.cssText = ''
+        }
+    })
+    document.body.addEventListener('contextmenu', function (e) {
+        contextmenu.style.cssText = 'left: ' + e.x + 'px; top: ' + e.y + 'px; display: block;'
+        e.preventDefault();
+    })
+    
+</script>
+<% } %>
 </body>
 </html>

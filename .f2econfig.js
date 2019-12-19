@@ -30,5 +30,6 @@ const config = {
     //         socket.send('init')
     //     })
     // }
+    authorization: 'admin:admin'
 }
 module.exports = config

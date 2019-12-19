@@ -107,13 +107,22 @@ export interface F2EConfig extends F2Events{
      * you can render websocket server via this
      */
     onServerCreate?: (server: net.Server) => void
+    /**
+     * init urls on server start
+     */
+    init_urls?: string[]
 
     /**
      * pages config
      */
     page_404?: string | PageRender<{ pathname: string }>
     page_50x?: string | PageRender<{ error: Error }>
-    page_dir?: string | PageRender<{ pathname: string, store: Object }>
+    page_dir?: string | PageRender<{ pathname: string, store: Object, conf: F2EConfig }>
+
+    /**
+     * 提供验证账户密码, 文件上传、删除等操作需要
+     */
+    authorization?: string
 }
 
 export const config: F2EConfig

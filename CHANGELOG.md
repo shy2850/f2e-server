@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v2.12.2
+- 支持配置 `init_urls?: string[]` 当服务器启动时初始化这些url
+- 目录自动更新BUG修改
+- 支持配置 `authorization?: string` 
+  - 提供验证账户密码 格式为 `${name}:${password}`
+  - 配置后支持目录页面下新增删除文件(夹)
+
 ## v2.12.0
 - 支持 `page` 相关配置
   - page_404
