@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.12.4
+- update包依赖
+- 修改 `include` 中间件的js代码压缩
+- 修改 `index.d.ts` 描述文件
+
 ## v2.12.2
 - 支持配置 `init_urls?: string[]` 当服务器启动时初始化这些url
 - 目录自动更新BUG修改
