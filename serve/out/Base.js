@@ -1,9 +1,14 @@
+// @ts-check
+
 const zlib = require('zlib')
 const mime = require('mime')
 
 module.exports = (type = 'text/html') => {
-    const mimeType = mime.lookup(type) || type
-    const isText = !!mime.charsets.lookup(mimeType, false)
+    const mimeType = mime.getType(type) || type
+    const isText = pathname => {
+        const type = mime.getType(pathname)
+        return /\b(html?|txt|javascript|json)\b/.test(type)
+    }
     return (fn, conf = {}) => (req, resp) => {
         let out = data => resp.end(data)
         let header = {
