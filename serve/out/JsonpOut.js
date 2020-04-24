@@ -10,6 +10,10 @@ module.exports = (fn, conf = {}) => (req, resp) => {
         out = (data) => resp.end(zlib.gzipSync(`${callback}(${JSON.stringify(data)})`))
     }
     resp.writeHead(200, header)
-    Promise.resolve(fn(req, resp, conf)).then(out).catch(out)
+    Promise.resolve(fn(req, resp, conf)).then(out).catch(err => {
+        console.log(err)
+        resp.writeHead(500, header)
+        out({ error: err.toString() })
+    })
     return false
 }

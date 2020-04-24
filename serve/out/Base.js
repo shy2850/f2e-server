@@ -19,7 +19,11 @@ module.exports = (type = 'text/html') => {
             out = data => resp.end(zlib.gzipSync(data))
         }
         resp.writeHead(200, header)
-        Promise.resolve(fn(req, resp, conf)).then(out).catch(out)
+        Promise.resolve(fn(req, resp, conf)).then(out).catch(err => {
+            console.log(err)
+            resp.writeHead(500, header)
+            out(err.toString())
+        })
         return false
     }
 }
