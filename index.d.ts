@@ -15,7 +15,7 @@ declare namespace f2eserver {
          *  on request begin
          */
         beforeRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem: MemoryTree.Store): string | false | undefined
+            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem?: MemoryTree.Store): string | false | undefined
         }
         /**
          * on request end
@@ -44,6 +44,12 @@ declare namespace f2eserver {
          */
         onGet?: {
             (pathname: string, data: MemoryTree.DataBuffer, store: MemoryTree.Store): MemoryTree.DataBuffer | Promise<MemoryTree.DataBuffer>
+        }
+        /**
+         * if text
+         */
+        onText?: {
+            (pathname: string, data: MemoryTree.DataBuffer, req: IncomingMessage, resp: ServerResponse, mem: MemoryTree.Store): MemoryTree.DataBuffer | false
         }
         /**
          * whether to build some path from disk

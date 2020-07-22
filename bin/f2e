@@ -25,12 +25,14 @@ program
 program
     .command('build')
     .option('-w, --watch <watch>', 'build with watching-update')
+    .option('-c, --config <config>', `config file. default to ${F2E_CONFIG}`)
     .option('-t, --timeout <timeout>', 'build-in with timeout(1000ms) after build-out')
     .description('编译输出')
-    .action(({watch, timeout}) => {
+    .action(({ watch, timeout, config }) => {
         timeout = (timeout | 0) || 1000
         let beginTime = Date.now() + timeout
         console.log('build begin...')
+        setConfig(config)
         require('../lib/util/build')(function () {
             console.log('build finished' + (watch ? '!\n  & building...' : ' with: ' + (Date.now() - beginTime) + 'ms' ))
         }, {watch, timeout})
