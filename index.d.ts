@@ -10,6 +10,11 @@ export = f2eserver;
 
 declare function f2eserver(conf: f2eserver.F2EConfig): void
 declare namespace f2eserver {
+    export type SetResult = MemoryTree.DataBuffer | {
+        data: MemoryTree.DataBuffer;
+        outputPath?: string;
+        originPath?: string;
+    }
     export interface F2Events {
         /**
          *  on request begin
@@ -33,11 +38,7 @@ declare namespace f2eserver {
          * on data save into memory
          */
         onSet?: {
-            (pathname: string, data: MemoryTree.DataBuffer, store: MemoryTree.Store): MemoryTree.DataBuffer | Promise<{
-                data: MemoryTree.DataBuffer;
-                outputPath: string;
-                originPath: string;
-            }>
+            (pathname: string, data: MemoryTree.DataBuffer, store: MemoryTree.Store): SetResult | Promise<SetResult>
         }
         /**
          * get data from memory
@@ -111,8 +112,33 @@ declare namespace f2eserver {
         range_size?: number
         useLess?: boolean | LessConfig
         useBabel?: boolean | BabelConfig
+
+        /**
+         * 简单打包模式, 会把依赖的文件无序的合并到目标文件中
+         * 不支持sourcemap
+         */
+        bundles?: {
+            /** 用一个正则匹配到所有需要合并的文件列表 */
+            test?: RegExp
+            /** 目标文件完整路径, 必须在项目中存在 */
+            dist?: string
+        }[]
+
+        /**
+         * 使用 bundles 模式打包amd模块时，支持根据文件路径设置 模块ID
+         */
+        getModuleId?: (pathname: string) => string
+
         middlewares?: (MiddlewareCreater | MiddlewareRef)[]
         output?: string
+        /**
+         * build 阶段是否使用 uglify/cleanCSS 进行 minify 操作
+         * 可以根据文件路径或者文件内容、大小给出结果
+         * @param  {string} pathname 资源路径名
+         * @param  {MemoryTree.DataBuffer} data     资源内容
+         * @return {boolean}
+         */
+        shouldUseMinify?: (pathname: string, data: MemoryTree.DataBuffer) => boolean
         /**
          * after server create
          * you can render websocket server via this
