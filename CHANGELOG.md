@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.12.12
+- update包依赖
+- 修改 `index.d.ts` 描述文件
+- 内置中间件添加ts-check
+
 ## v2.12.4
 - update包依赖
 - 修改 `include` 中间件的js代码压缩

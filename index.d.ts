@@ -1,8 +1,15 @@
 import { IncomingMessage, ServerResponse, Server } from "http"
 import { MemoryTree } from "memory-tree"
+import * as babel from 'babel-core'
 import * as net from 'net'
-type LessConfig = any
-type BabelConfig = any
+export type LessConfig = less.Options
+export interface BabelConfig extends babel.TransformOptions {
+    /**
+     * 哪些后缀需要babel编译
+     * @default /\.[jet]sx?$/
+     */
+    _suffix?: RegExp
+}
 
 
 export as namespace f2eserver;
@@ -56,7 +63,7 @@ declare namespace f2eserver {
          * whether to build some path from disk
          */
         buildFilter?: {
-            (pathname: string, data: MemoryTree.DataBuffer): boolean
+            (pathname: string): boolean
         }
         /**
          * whether to persist data by outputPath
@@ -112,6 +119,10 @@ declare namespace f2eserver {
         range_size?: number
         useLess?: boolean | LessConfig
         useBabel?: boolean | BabelConfig
+        /**
+         * 启用babel时候是否
+         */
+        sourceMap?: boolean
 
         /**
          * 简单打包模式, 会把依赖的文件无序的合并到目标文件中
@@ -128,6 +139,24 @@ declare namespace f2eserver {
          * 使用 bundles 模式打包amd模块时，支持根据文件路径设置 模块ID
          */
         getModuleId?: (pathname: string) => string
+
+        /**
+         * @default /\$include\[["'\s]*([^"'\s]+)["'\s]*\](?:\[["'\s]*([^"'\s]+)["'\s]*\])?/g
+         */
+        include?: RegExp
+        /**
+         * @default /\$belong\[["'\s]*([^"'\s]+)["'\s]*\]/
+         */
+        belong?: RegExp
+        /**
+         * @default "$[placeholder]"
+         */
+        placeholder?: string
+
+        /**
+         * 通过文件名判断是否文本资源, 用于include模块扩展mime
+         */
+        isText?: (pathname: string) => boolean
 
         middlewares?: (MiddlewareCreater | MiddlewareRef)[]
         output?: string
