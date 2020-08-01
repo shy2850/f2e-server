@@ -2,18 +2,14 @@ import { IncomingMessage, ServerResponse, Server } from "http"
 import { MemoryTree } from "memory-tree"
 import * as babel from 'babel-core'
 import * as net from 'net'
-export type LessConfig = less.Options
-export interface BabelConfig extends babel.TransformOptions {
+type LessConfig = Less.Options
+interface BabelConfig extends babel.TransformOptions {
     /**
      * 哪些后缀需要babel编译
      * @default /\.[jet]sx?$/
      */
     _suffix?: RegExp
 }
-
-
-export as namespace f2eserver;
-export = f2eserver;
 
 declare function f2eserver(conf: f2eserver.F2EConfig): void
 declare namespace f2eserver {
@@ -191,3 +187,4 @@ declare namespace f2eserver {
         authorization?: string
     }
 }
+export = f2eserver;
