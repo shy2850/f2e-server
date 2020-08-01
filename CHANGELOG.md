@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.12.13
+- build 设置cofig文件BUG修复
+
 ## v2.12.12
 - update包依赖
 - 修改 `index.d.ts` 描述文件
