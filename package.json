@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.12.14",
+  "version": "2.12.15",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
@@ -50,6 +50,7 @@
     "ws": "^7.3.1"
   },
   "dependencies": {
+    "@types/less": "^3.0.1",
     "babel-core": "^6.26.3",
     "chokidar": "^1.7.0",
     "clean-css": "^4.2.3",
