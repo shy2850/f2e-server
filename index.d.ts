@@ -75,7 +75,7 @@ declare namespace f2eserver {
         setBefore?: number
     }
     export interface MiddlewareCreater {
-        (conf: F2EConfig, options: any): Middleware
+        (conf: F2EConfig, options?: any): Middleware
     }
     export interface MiddlewareRef {
         /**
