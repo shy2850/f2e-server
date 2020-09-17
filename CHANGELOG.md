@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.13.0
+- less 中间件支持map输出, 支持过滤 import 导入的源文件编译和输出
+- include 模块支持过滤源文件编译和输出
+- 增加 log 输出每个资源的构建时间方便调试 参数为 `__withlog__`
 ## v2.12.13
 - build 设置cofig文件BUG修复
 

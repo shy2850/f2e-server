@@ -180,6 +180,10 @@ declare namespace f2eserver {
          */
         __ignores__?: Set<string>
         /**
+         * 输出所有资源编译信息
+         */
+        __withlog__?: boolean
+        /**
          * pages config
          */
         page_404?: string | PageRender<{ pathname: string }>
