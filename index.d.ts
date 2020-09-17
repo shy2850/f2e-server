@@ -175,6 +175,11 @@ declare namespace f2eserver {
         init_urls?: string[]
 
         /**
+         * 运行时添加(中间件中随时添加)，源文件读取，不编译、不输出
+         * @readonly
+         */
+        __ignores__?: Set<string>
+        /**
          * pages config
          */
         page_404?: string | PageRender<{ pathname: string }>
