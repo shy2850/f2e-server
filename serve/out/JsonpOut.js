@@ -1,10 +1,15 @@
+// @ts-check
 const zlib = require('zlib')
-module.exports = (fn, conf = {}) => (req, resp) => {
-    const { callback = 'callback' } = req.data
+/**
+ * @type {import('../index').ExecOut}
+ */
+const provider = (fn, conf = {}) => (req, resp) => {
+    const { renderHeaders = (h => h) } = conf
+    const { callback = 'callback' } = req['data']
     let out = (data) => resp.end(`${callback}(${JSON.stringify(data)})`)
-    let header = {
+    let header = renderHeaders({
         'Content-Type': 'text/javascript; charset=utf-8'
-    }
+    }, req)
     if (conf.gzip) {
         header['Content-Encoding'] = 'gzip'
         out = (data) => resp.end(zlib.gzipSync(`${callback}(${JSON.stringify(data)})`))
@@ -17,3 +22,5 @@ module.exports = (fn, conf = {}) => (req, resp) => {
     })
     return false
 }
+
+module.exports = provider

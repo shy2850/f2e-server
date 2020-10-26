@@ -1,11 +1,17 @@
-module.exports = (fn, conf = {
+// @ts-check
+
+/**
+ * @type {import('../index').ExecOut}
+ */
+const provider = (fn, conf = {
     interval: 1000
 }) => (req, resp) => {
-    resp.writeHead(200, {
+    const { renderHeaders = (h => h) } = conf
+    resp.writeHead(200, renderHeaders({
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive'
-    })
+    }, req))
 
     let interval1
     let interval2
@@ -33,7 +39,9 @@ module.exports = (fn, conf = {
         clearTimeout(interval1)
         clearTimeout(interval2)
         resp.end()
-    }, false)
+    })
     loop()
     return false
 }
+
+module.exports = provider
