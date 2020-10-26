@@ -45,6 +45,7 @@ program
     .option('-c, --config <config>', `config file. default to ${F2E_CONFIG}`)
     .option('-H, --host <host>', 'port 80 & set local host')
     .option('-B, --build <build>', 'build with true')
+    .option('-O, --open', '打开浏览器')
     .description('启动服务器')
     .action(options => {
         if (options.config) {

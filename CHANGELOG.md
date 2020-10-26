@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.13.2
+- renderHeaders 支持添加统一响应头渲染参数
+- port 自动寻找功能删除, 项目必须显示的配置port
 ## v2.13.0
 - less 中间件支持map输出, 支持过滤 import 导入的源文件编译和输出
 - include 模块支持过滤源文件编译和输出

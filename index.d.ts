@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse, Server } from "http"
+import { IncomingMessage, ServerResponse, OutgoingHttpHeaders } from "http"
 import { MemoryTree } from "memory-tree"
 import * as babel from 'babel-core'
 import * as net from 'net'
@@ -190,6 +190,7 @@ declare namespace f2eserver {
         page_50x?: string | PageRender<{ error: Error }>
         page_dir?: string | PageRender<{ pathname: string, store: Object, conf: F2EConfig }>
 
+        renderHeaders?: { (headers: OutgoingHttpHeaders, req?: IncomingMessage): OutgoingHttpHeaders }
         /**
          * 提供验证账户密码, 文件上传、删除等操作需要
          */
