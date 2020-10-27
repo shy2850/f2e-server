@@ -190,6 +190,13 @@ declare namespace f2eserver {
         page_50x?: string | PageRender<{ error: Error }>
         page_dir?: string | PageRender<{ pathname: string, store: Object, conf: F2EConfig }>
 
+        /**
+         * 请求body转化为UTF8字符串长度 小于100K时候进行 parse
+         */
+        max_body_parse_size?: number
+        /**
+         * 所有响应附加响应头信息
+         */
         renderHeaders?: { (headers: OutgoingHttpHeaders, req?: IncomingMessage): OutgoingHttpHeaders }
         /**
          * 提供验证账户密码, 文件上传、删除等操作需要
