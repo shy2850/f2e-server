@@ -19,8 +19,8 @@ const creater: MiddlewareCreater = (conf) => {
     const route = new Route()
     route.on('api/dosomething', out.JsonOut(dosomething, conf));    // 普通json接口返回
     route.on('api/dosomething.js', out.JsonpOut(dosomething, conf));    // 支持callback参数的jsonp接口返回
-    route.on('api/doingsomething', out.ServerSent(dosomething, { ...conf, interval: 2000 }));  // 支持serverSent没200ms一次推送
-    route.on('xx.pdf', out.Base(download, conf))    // 支持原始数据输出
+    route.on('api/doingsomething', out.ServerSent(dosomething, { ...conf, interval: 2000 }));  // 支持serverSent每2000ms一次推送
+    route.on('xx.pdf', out.Base('application/octet-stream')(download, conf))    // 支持原始数据输出
 
     return {
         onRoute: route.execute

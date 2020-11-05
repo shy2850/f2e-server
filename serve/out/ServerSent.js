@@ -24,9 +24,13 @@ const provider = (fn, conf = {
     }
 
     const loop = async function loop () {
-        const res = await Promise.resolve(fn(req, resp, conf))
-        if (res && resp.writable && !resp.finished) {
-            resp.write(`data:${JSON.stringify(res)}\n\n`)
+        try {
+            const res = await Promise.resolve(fn(req, resp, conf))
+            if (res && resp.writable && !resp.finished) {
+                resp.write(`data:${JSON.stringify(res)}\n\n`)
+            }
+        } catch (e) {
+            console.log(e)
         }
         if (conf.interval) {
             interval2 = setTimeout(loop, conf.interval)
