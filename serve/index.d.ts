@@ -30,5 +30,8 @@ export class Route {
     on: {
         (reg: string | RegExp, exec: ExecFn): void
     }
+    match: {
+        (pathname: string): boolean
+    }
 }
 export declare const out: Out

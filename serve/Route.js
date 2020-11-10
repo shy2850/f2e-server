@@ -31,4 +31,7 @@ module.exports = class {
     on (reg, exec) {
         this.routes.push({reg, exec})
     }
+    match (pathname) {
+        return this.routes.some(route => test(route.reg, pathname))
+    }
 }
