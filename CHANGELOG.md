@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.13.7
+- beforeRoute 开始生效
+
 ## v2.13.5
 - 添加参数 `max_body_parse_size` 请求body转化为UTF8字符串长度小于100K时候进行parse
 

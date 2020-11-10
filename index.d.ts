@@ -23,13 +23,13 @@ declare namespace f2eserver {
          *  on request begin
          */
         beforeRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem?: MemoryTree.Store): string | false | undefined
+            (pathname: string, req: IncomingMessage, resp: ServerResponse, conf?: F2EConfig): string | false | undefined
         }
         /**
          * on request end
          */
         onRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem: MemoryTree.Store): string | false | undefined
+            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem?: MemoryTree.Store): string | false | undefined
         }
         /**
          * on file change
