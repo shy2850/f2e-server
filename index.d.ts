@@ -201,14 +201,6 @@ declare namespace f2eserver {
          */
         max_body_parse_size?: number
         /**
-         * 可接收最大请求大小，设置为0或者不设置时候表示不限制 超出后 413
-         */
-        max_body_size?: number
-        /**
-         * 每分钟最多请求数，设置为0或者不设置时候表示不限制，超出后 403
-         */
-        max_req_per_min?: number
-        /**
          * 所有响应附加响应头信息
          */
         renderHeaders?: { (headers: OutgoingHttpHeaders, req?: IncomingMessage): OutgoingHttpHeaders }
