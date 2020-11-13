@@ -13,6 +13,12 @@ interface BabelConfig extends babel.TransformOptions {
 
 declare function f2eserver(conf: f2eserver.F2EConfig): void
 declare namespace f2eserver {
+    export interface RequestWith<T = any> extends IncomingMessage {
+        data: T,
+        body?: string,
+        rawBody?: Uint8Array[],
+        post?: T
+    }
     export type SetResult = MemoryTree.DataBuffer | {
         data: MemoryTree.DataBuffer;
         outputPath?: string;
@@ -194,6 +200,14 @@ declare namespace f2eserver {
          * 请求body转化为UTF8字符串长度 小于100K时候进行 parse
          */
         max_body_parse_size?: number
+        /**
+         * 可接收最大请求大小，设置为0或者不设置时候表示不限制 超出后 413
+         */
+        max_body_size?: number
+        /**
+         * 每分钟最多请求数，设置为0或者不设置时候表示不限制，超出后 403
+         */
+        max_req_per_min?: number
         /**
          * 所有响应附加响应头信息
          */
