@@ -1,15 +1,7 @@
 import { IncomingMessage, ServerResponse, OutgoingHttpHeaders } from "http"
 import { MemoryTree } from "memory-tree"
-import * as babel from 'babel-core'
 import * as net from 'net'
 type LessConfig = Less.Options
-interface BabelConfig extends babel.TransformOptions {
-    /**
-     * 哪些后缀需要babel编译
-     * @default /\.[jet]sx?$/
-     */
-    _suffix?: RegExp
-}
 
 declare function f2eserver(conf: f2eserver.F2EConfig): void
 declare namespace f2eserver {
@@ -120,7 +112,6 @@ declare namespace f2eserver {
          */
         range_size?: number
         useLess?: boolean | LessConfig
-        useBabel?: boolean | BabelConfig
         /**
          * 启用babel时候是否
          */

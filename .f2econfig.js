@@ -11,7 +11,7 @@ const config = {
     livereload: !build,
     build,
     gzip: true,
-    useLess: true,
+    // useLess: true,
     middlewares: [
         { middleware: 'template', test: /\.html?/ },
         // () => {
@@ -30,6 +30,6 @@ const config = {
     //         socket.send('init')
     //     })
     // }
-    authorization: 'admin:admin'
+    // authorization: 'admin:admin'
 }
 module.exports = config

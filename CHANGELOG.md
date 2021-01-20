@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.14.0
+- 移除babel中间件以及 babel-core 依赖所有相关
+- 所有压缩相关依赖包移至 devDependencies
+
 ## v2.13.7
 - beforeRoute 开始生效
 

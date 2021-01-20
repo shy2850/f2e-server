@@ -59,3 +59,4 @@ typings/
 .vscode
 .DS_Store
 output
+node_modules.tar.gz

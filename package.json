@@ -35,34 +35,28 @@
   "devDependencies": {
     "@types/node": "^7.10.11",
     "@types/uglify-es": "^3.0.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-amd": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
+    "clean-css": "^4.2.3",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^4.2.3",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "less": "^3.12.2",
     "marked": "^0.6.3",
+    "uglify-es": "^3.3.9",
+    "uglify-js": "^3.12.5",
     "ws": "^7.3.1"
   },
   "dependencies": {
     "@types/less": "^3.0.1",
-    "babel-core": "^6.26.3",
-    "chokidar": "^1.7.0",
-    "clean-css": "^4.2.3",
+    "chokidar": "^3.5.1",
     "commander": "^2.20.3",
     "etag": "^1.8.1",
     "f2e-middle-template": "*",
-    "less": "^3.12.2",
     "lodash": "^4.17.19",
     "memory-tree": "^0.6.14",
     "mime": "^2.4.6",
-    "tcp-port-used": "^1.0.1",
-    "uglify-es": "^3.3.9",
-    "uglify-js": "^3.10.0"
+    "tcp-port-used": "^1.0.1"
   }
 }
