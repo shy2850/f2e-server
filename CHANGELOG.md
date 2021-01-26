@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.14.1
+- 升级依赖 memmory-tree@0.6.15
 
 ## v2.14.0
 - 移除babel中间件以及 babel-core 依赖所有相关
