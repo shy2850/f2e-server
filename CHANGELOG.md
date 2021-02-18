@@ -1,4 +1,7 @@
 # CHANGELOG
+## v2.14.2
+- BUG修改 init_urls 触发时机修改
+
 ## v2.14.1
 - 升级依赖 memmory-tree@0.6.15
 

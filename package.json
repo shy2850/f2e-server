@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.14.1",
+  "version": "2.14.2",
   "description": "f2e-server 2",
   "main": "index.js",
   "scripts": {
@@ -33,30 +33,30 @@
   "typings": "index.d.ts",
   "homepage": "https://github.com/shy2850/f2e-server#readme",
   "devDependencies": {
-    "@types/node": "^7.10.11",
+    "@types/node": "^7.10.14",
     "@types/uglify-es": "^3.0.0",
     "clean-css": "^4.2.3",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^4.2.3",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "less": "^3.12.2",
+    "less": "^3.13.1",
     "marked": "^0.6.3",
     "uglify-es": "^3.3.9",
-    "uglify-js": "^3.12.5",
-    "ws": "^7.3.1"
+    "uglify-js": "^3.12.7",
+    "ws": "^7.4.3"
   },
   "dependencies": {
-    "@types/less": "^3.0.1",
+    "@types/less": "^3.0.2",
     "chokidar": "^3.5.1",
     "commander": "^2.20.3",
     "etag": "^1.8.1",
     "f2e-middle-template": "*",
-    "lodash": "^4.17.19",
-    "memory-tree": "^0.6.15",
-    "mime": "^2.4.6",
-    "tcp-port-used": "^1.0.1"
+    "lodash": "^4.17.20",
+    "memory-tree": "^0.6.16",
+    "mime": "^2.5.0",
+    "tcp-port-used": "^1.0.2"
   }
 }
