@@ -134,9 +134,13 @@ declare namespace f2eserver {
         getModuleId?: (pathname: string) => string
 
         /**
-         * @default /\$include\[["'\s]*([^"'\s]+)["'\s]*\](?:\[["'\s]*([^"'\s]+)["'\s]*\])?/g
+         * @default [/\$include\[["'\s]*([^"'\s]+)["'\s]*\](?:\[["'\s]*([^"'\s]+)["'\s]*\])?/g]
          */
-        include?: RegExp
+        include?: RegExp[]
+        /**
+         * @default /^@import["'\s]+(.+)["'\s]+;?$/
+         */
+        css_import?: RegExp
         /**
          * @default /\$belong\[["'\s]*([^"'\s]+)["'\s]*\]/
          */

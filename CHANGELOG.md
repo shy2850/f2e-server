@@ -1,4 +1,7 @@
 # CHANGELOG
+## v2.14.3
+- 修改参数 include 为RegExp[] 可以支持多组正则替换, 默认支持css @import
+
 ## v2.14.2
 - BUG修改 init_urls 触发时机修改
 
