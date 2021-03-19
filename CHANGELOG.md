@@ -1,4 +1,7 @@
 # CHANGELOG
+## v2.14.4
+- 修改参数 include 将 2.14.3 默认新增的 @import 去掉 【影响less编译】
+
 ## v2.14.3
 - 修改参数 include 为RegExp[] 可以支持多组正则替换, 默认支持css @import
 
