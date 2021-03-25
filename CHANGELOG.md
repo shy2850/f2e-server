@@ -1,4 +1,7 @@
 # CHANGELOG
+## v2.14.5
+- 修改 files 配置，防止提交不需要的文件到npm仓库
+
 ## v2.14.4
 - 修改参数 include 将 2.14.3 默认新增的 @import 去掉 【影响less编译】
 

@@ -1,8 +1,16 @@
 {
   "name": "f2e-server",
-  "version": "2.14.4",
+  "version": "2.14.5",
   "description": "f2e-server 2",
   "main": "index.js",
+  "files": [
+    "bin",
+    "keys",
+    "lib",
+    "pages",
+    ".f2econfig.js",
+    "index.*"
+  ],
   "scripts": {
     "start": "node ./bin/f2e start -O",
     "start:config": "node ./bin/f2e start -c .f2econfig.1.js",
