@@ -16,8 +16,8 @@
 </head>
 <body>
 <ul>
-    <li><a href="../">../</a></li>
-<%=Object.keys(store).sort().map(k => `    <li tabindex="1"><a href="${pathname}/${k}">${k}</a></li>`).join('\n')%>
+    <li><a href="${dirname ? ('/' + dirname) : '/'}">..</a></li>
+<%=Object.keys(store).sort().map(k => `    <li tabindex="1"><a href="/${pathname ? (pathname + '/' + k) : k}">${k}</a></li>`).join('\n')%>
 </ul>
 
 <% if (conf.authorization) { %>

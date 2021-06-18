@@ -189,7 +189,7 @@ declare namespace f2eserver {
          */
         page_404?: string | PageRender<{ pathname: string }>
         page_50x?: string | PageRender<{ error: Error }>
-        page_dir?: string | PageRender<{ pathname: string, store: Object, conf: F2EConfig }>
+        page_dir?: string | PageRender<{ pathname: string, dirname: string, store: Object, conf: F2EConfig }>
 
         /**
          * 请求body转化为UTF8字符串长度 小于100K时候进行 parse
