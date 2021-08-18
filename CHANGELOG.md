@@ -1,4 +1,8 @@
 # CHANGELOG
+## v2.14.8
+- 静态服务APP恢复
+- `url.parse` 修改为 `new URL`
+
 ## v2.14.6
 - 默认目录配置修改
 

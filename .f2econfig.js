@@ -10,6 +10,8 @@ const { join } = require('path')
 const config = {
     livereload: !build,
     build,
+    // app: 'static',
+    // __withlog__: true,
     gzip: true,
     // useLess: true,
     middlewares: [

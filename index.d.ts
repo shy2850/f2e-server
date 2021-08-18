@@ -203,6 +203,13 @@ declare namespace f2eserver {
          * 提供验证账户密码, 文件上传、删除等操作需要
          */
         authorization?: string
+
+        /**
+         * 自定义全局解析器
+         */
+        app?: 'static' | {
+            (conf: F2EConfig): (req: IncomingMessage, resp: ServerResponse) => void
+        }
     }
 }
 export = f2eserver;
