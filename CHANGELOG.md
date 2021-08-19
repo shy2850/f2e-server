@@ -1,4 +1,8 @@
 # CHANGELOG
+
+## v2.14.8
+- 静态服务路由解析字符问题修改
+
 ## v2.14.8
 - 静态服务APP恢复
 - `url.parse` 修改为 `new URL`
