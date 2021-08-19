@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v2.14.8
+## v2.14.10
+- 静态服务路由支持过滤 `buildFilter`
+- 静态服务路由修改 `onRoute` 为 `beforeRoute`
+
+## v2.14.9
 - 静态服务路由解析字符问题修改
 
 ## v2.14.8
