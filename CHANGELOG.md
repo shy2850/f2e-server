@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.14.13
+- BUG修复 mime判断 text 错写为 txt
 ## v2.14.12
 - `req.data` 和 `req.post` 参数使用 `new URL().searchParams` 获取并转为 `NodeJS.Dict<string | string[]>`
 
