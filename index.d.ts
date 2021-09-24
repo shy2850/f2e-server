@@ -6,8 +6,8 @@ type LessConfig = Less.Options
 declare function f2eserver(conf: f2eserver.F2EConfig): void
 declare namespace f2eserver {
     export interface RequestWith<T = any> extends IncomingMessage {
-        data: NodeJS.Dict<string | string[]>,
-        body?: string,
+        data: T,
+        body?: T,
         rawBody?: Uint8Array[],
         post?: T
     }

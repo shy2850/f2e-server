@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.14.14
+- types 修改
 ## v2.14.13
 - BUG修复 mime判断 text 错写为 txt
 ## v2.14.12
