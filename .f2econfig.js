@@ -24,6 +24,7 @@ const config = {
         //     }
         // }
     ],
+    // try_files: 'index.html',
     output: join(__dirname, './output'),
     // onServerCreate: (server) => {
     //     const { Server } = require('ws')

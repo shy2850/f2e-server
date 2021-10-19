@@ -96,6 +96,11 @@ declare namespace f2eserver {
         (req: IncomingMessage, resp: ServerResponse, data: T): R
     }
 
+    export interface TryFilesItem {
+        test: RegExp,
+        exec: (...args: Parameters<F2EConfig['onRoute']>) => string,
+    }
+
     export interface F2EConfig extends F2Events {
         root?: string
         port?: number
@@ -207,9 +212,17 @@ declare namespace f2eserver {
         /**
          * 自定义全局解析器
          */
-        app?: 'static' | {
+        app?: 'static' | 'memory-tree' | {
             (conf: F2EConfig): (req: IncomingMessage, resp: ServerResponse) => void
-        }
+        },
+
+        /**
+         * 参考Nginx配置 `try_files` 而产生的功能 (`querystring`已经解析到`req.data`中)
+         * 1. 类型为`string`时, 所有未能找到资源的情况都转发到这个 `pathname`
+         * 2. 类型为`[RegExp, string]`时, 原来`pathname`能够匹配`test`的情况都转发到新的`pathname`
+         * 2. 类型为`{test, exec}[]`, 依次循环匹配`test`, 进行转发
+         */
+        try_files?: string | [test: RegExp, pathname: string] | TryFilesItem[]
     }
 }
 export = f2eserver;

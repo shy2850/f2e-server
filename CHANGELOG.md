@@ -1,4 +1,8 @@
 # CHANGELOG
+## v2.15.0
+- 配置文件错误时直接退出系统
+- 新增`try_files`配置内置中间件，支持类似nginx的try_files配置
+
 ## v2.14.14
 - types 修改
 ## v2.14.13
