@@ -3,7 +3,7 @@ import { F2EConfig } from 'f2e-server'
 import { MemoryTree } from "memory-tree"
 
 export interface ExecFn {
-    (req: IncomingMessage, resp: ServerResponse): any
+    (req: IncomingMessage, resp: ServerResponse, pathname?: string, memory?: MemoryTree.Store): any
 }
 export interface Callback<T extends Object = {}> {
     (req?: IncomingMessage, resp?: ServerResponse, conf?: F2EConfig): T | Promise<T>

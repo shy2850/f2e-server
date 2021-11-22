@@ -18,7 +18,7 @@ module.exports = class {
             const route = routes[i]
             if (test(route.reg, pathname)) {
                 matches = true
-                const res = route.exec(req, resp)
+                const res = route.exec(req, resp, pathname, memory)
                 if (typeof res !== 'undefined') {
                     return res
                 }
