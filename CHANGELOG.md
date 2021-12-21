@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.16.1
+- middleware 所有事件均修改为支持Promise(有遗漏)
 ## v2.16.0
 - ts 修改
 - middleware 所有事件均修改为支持Promise
