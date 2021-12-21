@@ -21,13 +21,13 @@ declare namespace f2eserver {
          *  on request begin
          */
         beforeRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, conf?: F2EConfig): string | false | undefined
+            (pathname: string, req: IncomingMessage, resp: ServerResponse, conf?: F2EConfig): string | false | void | Promise<string | false | void>
         }
         /**
          * on request end
          */
         onRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem?: MemoryTree.Store): string | false | undefined
+            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem?: MemoryTree.Store): string | false | void | Promise<string | false | void>
         }
         /**
          * on file change
@@ -51,7 +51,7 @@ declare namespace f2eserver {
          * if text
          */
         onText?: {
-            (pathname: string, data: MemoryTree.DataBuffer, req: IncomingMessage, resp: ServerResponse, mem: MemoryTree.Store): MemoryTree.DataBuffer | false
+            (pathname: string, data: MemoryTree.DataBuffer, req: IncomingMessage, resp: ServerResponse, mem: MemoryTree.Store): MemoryTree.DataBuffer | false | Promise<MemoryTree.DataBuffer | false>
         }
         /**
          * whether to build some path from disk
@@ -222,7 +222,7 @@ declare namespace f2eserver {
          * 2. 类型为`[RegExp, string]`时, 原来`pathname`能够匹配`test`的情况都转发到新的`pathname`
          * 2. 类型为`{test, exec}[]`, 依次循环匹配`test`, 进行转发
          */
-        try_files?: string | [test: RegExp, pathname: string] | TryFilesItem[]
+        try_files?: string | [RegExp, string] | TryFilesItem[]
     }
 }
 export = f2eserver;

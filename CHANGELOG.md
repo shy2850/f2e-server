@@ -1,4 +1,8 @@
 # CHANGELOG
+## v2.16.0
+- ts 修改
+- middleware 所有事件均修改为支持Promise
+
 ## v2.15.1
 - renderHeader修改，区分文本类型再新增编码
 
