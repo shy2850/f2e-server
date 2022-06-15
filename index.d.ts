@@ -96,11 +96,13 @@ declare namespace f2eserver {
         (req: IncomingMessage, resp: ServerResponse, data: T): R
     }
 
-    export interface TryFilesItem {
+    export type TryFilesItem = {
         test: RegExp,
         replacer?: string | {(m: string, ...args: any[]): string},
-        index: string | {(...args: Parameters<F2EConfig['onRoute']>): string},
-    }
+    } & (
+        { index: string | {(...args: Parameters<F2EConfig['onRoute']>): string} }
+        | { location: string | {(...args: Parameters<F2EConfig['onRoute']>): string} }
+    )
 
     export interface F2EConfig extends F2Events {
         root?: string

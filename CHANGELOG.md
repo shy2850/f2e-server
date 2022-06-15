@@ -1,7 +1,9 @@
 # CHANGELOG
 
+## v2.16.3
+- middleware `try_files` 参数修改支持`location`
 ## v2.16.2
-- middleware try_files 参数修改支持replacer
+- middleware `try_files` 参数修改支持`replacer`
 ## v2.16.1
 - middleware 所有事件均修改为支持Promise(有遗漏)
 ## v2.16.0
