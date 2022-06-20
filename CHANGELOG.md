@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.16.4
+- middleware `try_files` 支持多目录的index
 ## v2.16.3
 - middleware `try_files` 参数修改支持`location`
 ## v2.16.2
