@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.16.6
+- 更新less版本依赖到4.x
 ## v2.16.4
 - middleware `try_files` 支持多目录的index
 ## v2.16.3

@@ -13,7 +13,7 @@ const config = {
     // app: 'static',
     // __withlog__: true,
     gzip: true,
-    // useLess: true,
+    useLess: true,
     middlewares: [
         { middleware: 'template', test: /\.html?/ },
         // () => {
