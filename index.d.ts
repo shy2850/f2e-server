@@ -73,7 +73,7 @@ declare namespace f2eserver {
         setBefore?: number
     }
     export interface MiddlewareCreater {
-        (conf: F2EConfig, options?: any): Middleware
+        (conf: F2EConfig, options?: any): Middleware | undefined | null
     }
     export interface MiddlewareRef {
         /**
@@ -104,6 +104,11 @@ declare namespace f2eserver {
         | { location: string | {(...args: Parameters<F2EConfig['onRoute']>): string} }
     )
 
+    export interface LiveReloadConfig {
+        prefix?: string
+        publicPath?: string
+        heartBeatTimeout?: number
+    }
     export interface F2EConfig extends F2Events {
         root?: string
         port?: number
@@ -112,7 +117,7 @@ declare namespace f2eserver {
          * no host valid
          */
         no_host?: boolean
-        livereload?: boolean
+        livereload?: boolean | LiveReloadConfig
         build?: boolean
         gzip?: boolean
         /**

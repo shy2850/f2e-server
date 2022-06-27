@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.16.7
+- 更新memory-tree版本到 0.6.18
+- 修改livereload参数支持配置修改 `prefix` 和 `heartBeatTimeout`
 ## v2.16.6
 - 更新less版本依赖到4.x
 ## v2.16.4
