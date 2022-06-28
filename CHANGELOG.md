@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.16.8
+- BUG：v2.16.7 版本 livereload组件修改 导致全局onText渲染错误
 ## v2.16.7
 - 更新memory-tree版本到 0.6.18
 - 修改livereload参数支持配置修改 `prefix` 和 `heartBeatTimeout`
