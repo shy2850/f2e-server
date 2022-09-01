@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.16.10
+- 根据eslint格式修改优化
 ## v2.16.9
 - livereload 优化： 根据文档 visibilitychange 事件修改 serversent 连接状态
 ## v2.16.8

@@ -73,7 +73,7 @@ declare namespace f2eserver {
         setBefore?: number
     }
     export interface MiddlewareCreater {
-        (conf: F2EConfig, options?: any): Middleware | undefined | null
+        (conf: Required<F2EConfig>, options?: any): Middleware | undefined | null
     }
     export interface MiddlewareRef {
         /**
@@ -136,9 +136,9 @@ declare namespace f2eserver {
          */
         bundles?: {
             /** 用一个正则匹配到所有需要合并的文件列表 */
-            test?: RegExp
+            test: RegExp
             /** 目标文件完整路径, 必须在项目中存在 */
-            dist?: string
+            dist: string
         }[]
 
         /**
