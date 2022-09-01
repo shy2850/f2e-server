@@ -1,5 +1,6 @@
 # CHANGELOG
-
+## v2.16.9
+- livereload 优化： 根据文档 visibilitychange 事件修改 serversent 连接状态
 ## v2.16.8
 - BUG：v2.16.7 版本 livereload组件修改 导致全局onText渲染错误
 ## v2.16.7
@@ -95,7 +96,7 @@
 ## v2.12.2
 - 支持配置 `init_urls?: string[]` 当服务器启动时初始化这些url
 - 目录自动更新BUG修改
-- 支持配置 `authorization?: string` 
+- 支持配置 `authorization?: string`
   - 提供验证账户密码 格式为 `${name}:${password}`
   - 配置后支持目录页面下新增删除文件(夹)
 

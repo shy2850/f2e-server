@@ -224,7 +224,7 @@ module.exports = {
 ```
 
 ### 中间件
-参考 [f2e-middleware](https://github.com/shy2850/f2e-middleware) 
+参考 [f2e-middleware](https://github.com/shy2850/f2e-middleware)
 
 1. lodash 模板引擎
 2. markdown 编译
