@@ -194,7 +194,7 @@ declare namespace f2eserver {
          */
         onServerCreate?: (server: net.Server) => void
         /** 获取环境上下文信息 */
-        onContextReady?: (context: { middleware: Middleware, memory: MemoryTree }) => void
+        onContextReady?: (context: { middleware: Middleware, memory: MemoryTree.MemoryTree }) => void
         /**
          * init urls on server start
          */
