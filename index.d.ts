@@ -110,6 +110,7 @@ declare namespace f2eserver {
         heartBeatTimeout?: number
     }
     export interface F2EConfig extends F2Events {
+        watch?: boolean
         root?: string
         port?: number
         host?: string

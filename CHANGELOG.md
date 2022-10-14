@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.16.12
+- types： watch参数暴露
 ## v2.16.11
 - 编译依赖报错退出修改为 `error(exit 1)`
 ## v2.16.10
