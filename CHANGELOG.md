@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.16.13
+- memory-tree 更新
 ## v2.16.12
 - types： watch参数暴露
 ## v2.16.11
