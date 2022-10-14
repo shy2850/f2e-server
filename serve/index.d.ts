@@ -10,7 +10,7 @@ export interface Callback<T extends Object = {}> {
 }
 export interface BaseOutConfig extends Partial<F2EConfig> {
     interval?: number
-    
+
 }
 export interface ExecOut {
     (fn: Callback, conf?: BaseOutConfig): ExecFn
@@ -25,7 +25,7 @@ export interface Out {
 
 export class Route {
     execute: {
-        (pathname: string, req: IncomingMessage, res: ServerResponse, memory: MemoryTree.Store): any
+        (pathname: string, req: IncomingMessage, res: ServerResponse, memory?: MemoryTree.Store): any
     }
     on: {
         (reg: string | RegExp, exec: ExecFn): void
