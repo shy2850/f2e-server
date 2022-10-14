@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.16.14
+- 新增参数`onContextReady`: 获取环境内主要对象
 ## v2.16.13
 - memory-tree 更新
 ## v2.16.12

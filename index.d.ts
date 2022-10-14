@@ -27,7 +27,7 @@ declare namespace f2eserver {
          * on request end
          */
         onRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, mem?: MemoryTree.Store): string | false | void | Promise<string | false | void>
+            (pathname: string, req: IncomingMessage, resp: ServerResponse, store?: MemoryTree.Store): string | false | void | Promise<string | false | void>
         }
         /**
          * on file change
@@ -51,7 +51,7 @@ declare namespace f2eserver {
          * if text
          */
         onText?: {
-            (pathname: string, data: MemoryTree.DataBuffer, req: IncomingMessage, resp: ServerResponse, mem: MemoryTree.Store): MemoryTree.DataBuffer | false | Promise<MemoryTree.DataBuffer | false>
+            (pathname: string, data: MemoryTree.DataBuffer, req: IncomingMessage, resp: ServerResponse, store: MemoryTree.Store): MemoryTree.DataBuffer | false | Promise<MemoryTree.DataBuffer | false>
         }
         /**
          * whether to build some path from disk
@@ -110,14 +110,23 @@ declare namespace f2eserver {
         heartBeatTimeout?: number
     }
     export interface F2EConfig extends F2Events {
-        watch?: boolean
+        /** 项目根路径 */
         root?: string
+        /** 默认从2850开始找未使用的端口， 配置后不检测 */
         port?: number
+        /**
+         * 指定host访问生效
+         * @deprecated
+         */
         host?: string
         /**
-         * no host valid
+         * 不指定host访问生效
+         * @deprecated
          */
         no_host?: boolean
+        /** 开启监听文件修改 */
+        watch?: boolean
+        /** 开启监听文件修改，并植入sse监测脚本 */
         livereload?: boolean | LiveReloadConfig
         build?: boolean
         gzip?: boolean
@@ -184,6 +193,8 @@ declare namespace f2eserver {
          * you can render websocket server via this
          */
         onServerCreate?: (server: net.Server) => void
+        /** 获取环境上下文信息 */
+        onContextReady?: (context: { middleware: Middleware, memory: MemoryTree }) => void
         /**
          * init urls on server start
          */
