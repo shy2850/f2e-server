@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.16.17
+- 功能: 新增配置 `compressors` 扩展gzip压缩方案
 ## v2.16.16
 - BUG: `livereload` hide时候sse的undefined引用属性异常
 ## v2.16.15

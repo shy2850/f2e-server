@@ -131,6 +131,7 @@ declare namespace f2eserver {
         livereload?: boolean | LiveReloadConfig
         build?: boolean
         gzip?: boolean
+        /** gzip 压缩扩展，支持更多压缩方式 */
         compressors?: CompressorType[]
         /**
          * stream data output size per response
