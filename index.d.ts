@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse, OutgoingHttpHeaders } from "http"
 import { MemoryTree } from "memory-tree"
 import * as net from 'net'
+import { CompressorType } from "./lib/util/compressor"
 type LessConfig = Less.Options
 
 declare function f2eserver(conf: f2eserver.F2EConfig): void
@@ -130,6 +131,7 @@ declare namespace f2eserver {
         livereload?: boolean | LiveReloadConfig
         build?: boolean
         gzip?: boolean
+        compressors?: CompressorType[]
         /**
          * stream data output size per response
          */

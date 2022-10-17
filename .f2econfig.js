@@ -12,7 +12,7 @@ const config = {
     build,
     // app: 'static',
     // __withlog__: true,
-    gzip: true,
+    compressors: ['br', 'gzip', 'deflate'],
     useLess: true,
     middlewares: [
         { middleware: 'template', test: /\.html?/ },
