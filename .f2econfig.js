@@ -11,7 +11,7 @@ const config = {
     livereload: !build,
     build,
     // app: 'static',
-    // __withlog__: true,
+    __withlog__: true,
     // gzip: true,
     compressors: ['br', 'gzip', 'deflate'],
     useLess: true,
