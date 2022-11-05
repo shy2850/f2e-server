@@ -11,10 +11,14 @@ const config = {
     livereload: !build,
     build,
     // app: 'static',
-    __withlog__: true,
-    // gzip: true,
-    compressors: ['br', 'gzip', 'deflate'],
+    // __withlog__: true,
+    gzip: true,
+    // compressors: ['br', 'gzip', 'deflate'],
     useLess: true,
+    shouldUseMinify: (pathname) => {
+        // 使用include压缩，无需处理
+        return pathname != 'test/libs.js'
+    },
     middlewares: [
         { middleware: 'template', test: /\.html?/ },
         // () => {

@@ -1,4 +1,8 @@
 # CHANGELOG
+## v2.17.0
+- isText 全局整理
+- uglify-es -> terser
+- $include 不再支持压缩
 ## v2.16.17
 - 功能: 新增配置 `compressors` 扩展gzip压缩方案
 ## v2.16.16

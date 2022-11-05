@@ -1,17 +1,14 @@
 // @ts-check
 const zlib = require('zlib')
 const mime = require('mime')
-/**
- * @returns {import('../index').ExecOut}
- */
+const { URL } = require('url')
+
 const provider = (type = 'text/html') => {
     const mimeType = mime.getType(type) || type
-    const isText = pathname => {
-        const type = mime.getType(pathname)
-        return /\b(html?|txt|javascript|json)\b/.test(type)
-    }
     return (fn, conf = {}) => (req, resp) => {
         const { renderHeaders = (h => h) } = conf
+        const { pathname } = new URL('http://127.0.0.1' + req.url)
+        const isText = conf.isText(pathname)
         let out = data => resp.end(data)
         let header = renderHeaders({
             'Content-Type': mimeType + (isText ? '; charset=utf-8' : '')
