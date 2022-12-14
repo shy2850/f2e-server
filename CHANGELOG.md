@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.17.1
+- BUG: 压缩模块处理了非文本文件
 ## v2.17.0
 - isText 全局整理
 - uglify-es -> terser
