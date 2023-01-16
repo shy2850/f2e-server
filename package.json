@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.17.1",
+  "version": "2.17.2",
   "description": "f2e-server 2",
   "main": "index.js",
   "files": [
@@ -16,8 +16,8 @@
     "start:config": "node ./bin/f2e start -c .f2econfig.1.js",
     "build": "node ./bin/f2e build",
     "test": "node test/index.js",
-    "lint": "eslint {lib/**/,serve/,serve/**/}**.js",
-    "prepublish": "npm run lint"
+    "lint": "eslint lib/**/**.js",
+    "prepublishOnly": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -57,13 +57,13 @@
   },
   "dependencies": {
     "@types/less": "^3.0.2",
-    "chokidar": "^3.5.1",
+    "chokidar": "^3.5.3",
     "commander": "^2.20.3",
     "etag": "^1.8.1",
     "f2e-middle-template": "*",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "memory-tree": "^0.6.19",
-    "mime": "^2.5.0",
+    "mime": "^3.0.0",
     "tcp-port-used": "^1.0.2"
   }
 }
