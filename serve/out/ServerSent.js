@@ -39,7 +39,7 @@ const provider = (fn, conf = {
         }
     }
 
-    req.connection.addListener('close', () => {
+    req.socket.addListener('close', () => {
         clearTimeout(interval1)
         clearTimeout(interval2)
         resp.end()
