@@ -1,4 +1,6 @@
 # CHANGELOG
+## v2.17.3
+- TypeScript: 修改 .d.ts 描述
 ## v2.17.2
 - Update: 更新依赖包，mime更新到3.0.0
 ## v2.17.1

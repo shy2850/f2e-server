@@ -101,8 +101,8 @@ declare namespace f2eserver {
         test: RegExp,
         replacer?: string | {(m: string, ...args: any[]): string},
     } & (
-        { index: string | {(...args: Parameters<F2EConfig['onRoute']>): string} }
-        | { location: string | {(...args: Parameters<F2EConfig['onRoute']>): string} }
+        { index: string | {(pathname: string, req: IncomingMessage, resp: ServerResponse): string} }
+        | { location: string | {(pathname: string, req: IncomingMessage, resp: ServerResponse): string} }
     )
 
     export interface LiveReloadConfig {
