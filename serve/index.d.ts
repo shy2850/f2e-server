@@ -10,7 +10,7 @@ export interface Callback<T extends Object = {}> {
 }
 export interface BaseOutConfig extends Partial<F2EConfig> {
     interval?: number
-
+    interval_beat?: number
 }
 export interface ExecOut {
     (fn: Callback, conf?: BaseOutConfig): ExecFn

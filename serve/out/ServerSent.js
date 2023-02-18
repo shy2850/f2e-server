@@ -4,7 +4,8 @@
  * @type {import('../index').ExecOut}
  */
 const provider = (fn, conf = {
-    interval: 1000
+    interval: 1000,
+    interval_beat: 30000
 }) => (req, resp) => {
     const { renderHeaders = (h => h) } = conf
     resp.writeHead(200, renderHeaders({
@@ -19,7 +20,7 @@ const provider = (fn, conf = {
     const heartBeat = function heartBeat () {
         if (resp.writable && !resp.finished) {
             resp.write(`data:1\n\n`)
-            interval1 = setTimeout(heartBeat, 100000)
+            interval1 = setTimeout(heartBeat, conf.interval_beat || 30000)
         }
     }
 
@@ -33,7 +34,7 @@ const provider = (fn, conf = {
             console.log(e)
         }
         if (conf.interval) {
-            interval2 = setTimeout(loop, conf.interval)
+            interval2 = setTimeout(loop, conf.interval || 1000)
         } else {
             heartBeat()
         }
