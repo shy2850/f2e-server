@@ -1,4 +1,7 @@
 # CHANGELOG
+
+## v2.17.4
+- TypeScript: onServerCreate 参数修复 http.Server
 ## v2.17.3
 - TypeScript: 修改 .d.ts 描述
 ## v2.17.2

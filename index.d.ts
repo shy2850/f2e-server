@@ -1,6 +1,5 @@
-import { IncomingMessage, ServerResponse, OutgoingHttpHeaders } from "http"
+import { IncomingMessage, ServerResponse, OutgoingHttpHeaders, Server } from "http"
 import { MemoryTree } from "memory-tree"
-import * as net from 'net'
 import { CompressorType } from "./lib/util/compressor"
 type LessConfig = Less.Options
 
@@ -195,7 +194,7 @@ declare namespace f2eserver {
          * after server create
          * you can render websocket server via this
          */
-        onServerCreate?: (server: net.Server) => void
+        onServerCreate?: (server: Server) => void
         /** 获取环境上下文信息 */
         onContextReady?: (context: { middleware: Middleware, memory: MemoryTree.MemoryTree }) => void
         /**
