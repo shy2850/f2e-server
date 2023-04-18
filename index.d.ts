@@ -45,13 +45,45 @@ declare namespace f2eserver {
          * get data from memory
          */
         onGet?: {
-            (pathname: string, data: MemoryTree.DataBuffer, store: MemoryTree.Store): MemoryTree.DataBuffer | Promise<MemoryTree.DataBuffer>
+            (pathname: string, data: MemoryTree.DataBuffer, store: MemoryTree.Store, input_output_map: Map<string, {
+                output: string,
+                hash: string,
+            }>): MemoryTree.DataBuffer | Promise<MemoryTree.DataBuffer>
         }
         /**
-         * if text
+         * 资源hash重命名
+         */
+        namehash?: {
+            /**
+             * 要处理的入口文件
+             * @default ["index\\.html$"]
+            */
+            entries?: string[]
+            /**
+             * 替换src的正则
+             * @default ['\\s(?:=href|src)="([^"]*?)"']
+             */
+            searchValue?: string[]
+            /**
+             * 默认返回 `${output}?${hash}`
+             * @param output 替换后的文件名
+             * @param hash 文件摘要md5
+             * @returns 字符串
+             *
+             */
+            replacer?: (output: string, hash?: string) => string
+        }
+        /**
+         * if text on request
          */
         onText?: {
             (pathname: string, data: MemoryTree.DataBuffer, req: IncomingMessage, resp: ServerResponse, store: MemoryTree.Store): MemoryTree.DataBuffer | false | Promise<MemoryTree.DataBuffer | false>
+        }
+        /**
+         * whether to watch some path from disk
+         */
+        watchFilter?: {
+            (pathname: string): boolean
         }
         /**
          * whether to build some path from disk
@@ -98,11 +130,11 @@ declare namespace f2eserver {
 
     export type TryFilesItem = {
         test: RegExp,
-        replacer?: string | {(m: string, ...args: any[]): string},
+        replacer?: string | { (m: string, ...args: any[]): string },
     } & (
-        { index: string | {(pathname: string, req: IncomingMessage, resp: ServerResponse): string} }
-        | { location: string | {(pathname: string, req: IncomingMessage, resp: ServerResponse): string} }
-    )
+            { index: string | { (pathname: string, req: IncomingMessage, resp: ServerResponse): string } }
+            | { location: string | { (pathname: string, req: IncomingMessage, resp: ServerResponse): string } }
+        )
 
     export interface LiveReloadConfig {
         prefix?: string
@@ -141,22 +173,6 @@ declare namespace f2eserver {
          * 启用babel时候是否
          */
         sourceMap?: boolean
-
-        /**
-         * 简单打包模式, 会把依赖的文件无序的合并到目标文件中
-         * 不支持sourcemap
-         */
-        bundles?: {
-            /** 用一个正则匹配到所有需要合并的文件列表 */
-            test: RegExp
-            /** 目标文件完整路径, 必须在项目中存在 */
-            dist: string
-        }[]
-
-        /**
-         * 使用 bundles 模式打包amd模块时，支持根据文件路径设置 模块ID
-         */
-        getModuleId?: (pathname: string) => string
 
         /**
          * @default [/\$include\[["'\s]*([^"'\s]+)["'\s]*\](?:\[["'\s]*([^"'\s]+)["'\s]*\])?/g]

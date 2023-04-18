@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.18.0
+- Del: 移除`bundles`相关内容
+- 功能: 原来的`buildFilter`，拆分新增的`watchFilter`，原来`buildFilter`仅用于拦截编译
+- 功能: 新增 `namehash` 功能，支持资源路径替换
+
 ## v2.17.5
 - Deps: 锁定template中间件版本，并修改依赖
 ## v2.17.4
