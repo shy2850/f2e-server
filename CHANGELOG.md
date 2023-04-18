@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.17.5
+- Deps: 锁定template中间件版本，并修改依赖
 ## v2.17.4
 - TypeScript: onServerCreate 参数修复 http.Server
 ## v2.17.3
