@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.18.2
+- BUG: `namehash` 测试修改
+- 修改: **onSet过程中如果修改输出路径直接跳出并返回结果**
 ## v2.18.0
 - Del: 移除`bundles`相关内容
 - 功能: 原来的`buildFilter`，拆分新增的`watchFilter`，原来`buildFilter`仅用于拦截编译
