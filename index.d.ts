@@ -13,8 +13,12 @@ declare namespace f2eserver {
     }
     export type SetResult = MemoryTree.DataBuffer | {
         data: MemoryTree.DataBuffer;
-        outputPath?: string;
+        /** 源文件路径 */
         originPath?: string;
+        /** 修改后路径 */
+        outputPath?: string;
+        /** 结束操作链返回当前结果 */
+        end?: boolean;
     }
     export interface F2Events {
         /**
@@ -49,29 +53,6 @@ declare namespace f2eserver {
                 output: string,
                 hash: string,
             }>): MemoryTree.DataBuffer | Promise<MemoryTree.DataBuffer>
-        }
-        /**
-         * 资源hash重命名
-         */
-        namehash?: {
-            /**
-             * 要处理的入口文件
-             * @default ["index\\.html$"]
-            */
-            entries?: string[]
-            /**
-             * 替换src的正则
-             * @default ['\\s(?:=href|src)="([^"]*?)"']
-             */
-            searchValue?: string[]
-            /**
-             * 默认返回 `${output}?${hash}`
-             * @param output 替换后的文件名
-             * @param hash 文件摘要md5
-             * @returns 字符串
-             *
-             */
-            replacer?: (output: string, hash?: string) => string
         }
         /**
          * if text on request
@@ -260,6 +241,35 @@ declare namespace f2eserver {
          * 2. 类型为`{test, exec}[]`, 依次循环匹配`test`, 进行转发
          */
         try_files?: string | TryFilesItem[]
+
+        /**
+         * 统一修改资源名称
+         * @default `(oldname) => oldname`
+         */
+        rename?: (oldname: string, hash: string) => string
+        /**
+         * 资源引用修改名称
+         */
+        namehash?: {
+            /**
+             * 要处理的入口文件
+             * @default ["index\\.html$"]
+            */
+            entries?: string[]
+            /**
+             * 替换src的正则
+             * @default ['\\s(?:=href|src)="([^"]*?)"']
+             */
+            searchValue?: string[]
+            /**
+             * 默认返回 `${output}?${hash}`
+             * @param output 替换后的文件名
+             * @param hash 文件摘要md5
+             * @returns 字符串
+             *
+             */
+            replacer?: (output: string, hash?: string) => string
+        }
     }
 }
 export = f2eserver;

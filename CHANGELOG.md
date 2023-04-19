@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.18.4
+- 功能: `rename` 支持修改所有资源名称
+- 功能: `SetResult.end` 判断是否截断 `onSet` 操作链
 ## v2.18.3
 - BUG: `namehash` 测试修改
 - 修改: **onSet过程中如果修改输出路径直接跳出并返回结果**
