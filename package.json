@@ -1,6 +1,6 @@
 {
   "name": "f2e-server",
-  "version": "2.18.4",
+  "version": "2.18.5",
   "description": "f2e-server 2",
   "main": "index.js",
   "files": [
@@ -62,7 +62,7 @@
     "commander": "^2.20.3",
     "etag": "^1.8.1",
     "lodash": "^4.17.21",
-    "memory-tree": "^0.6.22",
+    "memory-tree": "^0.6.23",
     "mime": "^3.0.0",
     "tcp-port-used": "^1.0.2"
   }
