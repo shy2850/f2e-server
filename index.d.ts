@@ -6,9 +6,22 @@ type LessConfig = Less.Options
 declare function f2eserver(conf: f2eserver.F2EConfig): void
 declare namespace f2eserver {
     export interface RequestWith<T = any> extends IncomingMessage {
+        /**
+         * 请求search参数
+         */
         data: T,
-        body?: T,
+        /**
+         * 原始请求内容
+         */
         rawBody?: Uint8Array[],
+        /**
+         * POST请求为 application/json 类型时，转换后的参数
+         */
+        body?: T,
+        /**
+         * POST请求为 application/x-www-form-urlencoded 类型时，转化后的参数
+         * @description <b>不支持文件上传</b>
+         */
         post?: T
     }
     export type SetResult = MemoryTree.DataBuffer | {

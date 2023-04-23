@@ -185,20 +185,6 @@ module.exports = {
         return ok
     },
     /**
-     * 简单资源打包方案
-     */
-    bundles: [
-        {
-            /**
-             * 满足当前正则匹配，则附加到 `pathname.replace(test, dist)` 资源
-             *  1. dist路径必须能够匹配资源否则无效
-             *  2. test匹配到的资源(除dist外), 不再输出
-             */
-            test: /bundle[\\/].*/,
-            dist: 'test.js'
-        }
-    ],
-    /**
      * app 默认时候 f2e 构建系统, 支持 'static' 纯静态服务器
      * 如果 app 自定义, 相当于只是使用 f2e 的端口开启和域名解析功能, 其他所有配置失效
      */

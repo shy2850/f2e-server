@@ -1,9 +1,12 @@
 {
     "extends": "standard",
+    "env": {
+        "es2021": true
+    },
     "plugins": [
         "standard"
     ],
-    
+
     "rules": {
         "indent": ["error", 4],
         "camelcase": "off"

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.18.6
+- TypeScript: 修改 .d.ts 描述
+- esline: eslint 更新
 ## v2.18.5
 - 功能: `rename` 支持修改所有资源名称
 - 功能: `SetResult.end` 判断是否截断 `onSet` 操作链
