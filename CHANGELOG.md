@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.19.0
+- 功能: 删除keys目录，添加 `ssl_options` 支持手工配置ssl
+- 配置: `ignore_events` 支持过滤掉watch文件修改事件
 ## v2.18.8
 - Del: 删除创建APP的命令
 - Del: 修改默认conf取消所有依赖

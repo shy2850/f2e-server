@@ -138,8 +138,14 @@ declare namespace f2eserver {
     export interface F2EConfig extends F2Events {
         /** 项目根路径 */
         root?: string
-        /** 默认从2850开始找未使用的端口， 配置后不检测 */
+        /** 默认从2850开始找未使用的端口， 配置后不检测,
+         * 当配置端口为443的时候自动转化为 https 服务并需要配置 ssl_options */
         port?: number
+        /**
+         * ssl 配置
+         * 如: { key: string, cert: string }
+         * */
+        ssl_options?: https.ServerOptions<IncomingMessage, ServerResponse>
         /**
          * 指定host访问生效
          * @deprecated
@@ -152,6 +158,11 @@ declare namespace f2eserver {
         no_host?: boolean
         /** 开启监听文件修改 */
         watch?: boolean
+        /**
+         * 忽略文件更新事件
+         * @default ['add', 'addDir']
+         */
+        ignore_events: ("add" | "addDir" | "change" | "unlink" | "unlinkDir")[]
         /** 开启监听文件修改，并植入sse监测脚本 */
         livereload?: boolean | LiveReloadConfig
         build?: boolean
