@@ -162,7 +162,7 @@ declare namespace f2eserver {
          * 忽略文件更新事件
          * @default ['add', 'addDir']
          */
-        ignore_events: ("add" | "addDir" | "change" | "unlink" | "unlinkDir")[]
+        ignore_events?: ("add" | "addDir" | "change" | "unlink" | "unlinkDir")[]
         /** 开启监听文件修改，并植入sse监测脚本 */
         livereload?: boolean | LiveReloadConfig
         build?: boolean
