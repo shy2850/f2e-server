@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## v2.18.7
+## v2.18.8
 - Del: 删除创建APP的命令
+- Del: 修改默认conf取消所有依赖
 ## v2.18.6
 - TypeScript: 修改 .d.ts 描述
 - esline: eslint 更新

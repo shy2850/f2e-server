@@ -14,13 +14,13 @@ const config = {
     // __withlog__: true,
     gzip: true,
     // compressors: ['br', 'gzip', 'deflate'],
-    useLess: true,
+    useLess: false,
     shouldUseMinify: (pathname) => {
         // 使用include压缩，无需处理
         return pathname != 'test/libs.js'
     },
     middlewares: [
-        { middleware: 'template', test: /\.html?/ },
+        // { middleware: 'template', test: /\.html?/ },
         // () => {
         //     return {
         //         onRoute: p => {
