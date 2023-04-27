@@ -66,16 +66,5 @@ program
         HOSTS(options)
     })
 
-program
-    .command('create')
-    .description('创建单页App')
-    .action(appname => {
-        console.log(`
-    1. 下载 https://github.com/f2e-server/app/archive/master.zip
-    2. 解压后进入目录
-    3. npm i
-    4. npm start
-`)
-    })
 // 开始解析用户输入的命令
 program.parse(process.argv)
