@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.19.2
+- TypeScript: 修改 .d.ts 描述
 ## v2.19.1
 - 功能: 删除keys目录，添加 `ssl_options` 支持手工配置ssl
 - 配置: `ignore_events` 支持过滤掉watch文件修改事件

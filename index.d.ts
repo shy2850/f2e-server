@@ -1,4 +1,5 @@
 import { IncomingMessage, ServerResponse, OutgoingHttpHeaders, Server } from "http"
+import type * as https from 'https'
 import { MemoryTree } from "memory-tree"
 import { CompressorType } from "./lib/util/compressor"
 type LessConfig = Less.Options
@@ -145,7 +146,7 @@ declare namespace f2eserver {
          * ssl 配置
          * 如: { key: string, cert: string }
          * */
-        ssl_options?: https.ServerOptions<IncomingMessage, ServerResponse>
+        ssl_options?: https.ServerOptions
         /**
          * 指定host访问生效
          * @deprecated
