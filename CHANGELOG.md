@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.19.3
+- BUG & Feutre: 修改 `rename` 和 hash相关，所有资源均生成hash
 ## v2.19.2
 - TypeScript: 修改 .d.ts 描述
 ## v2.19.1
