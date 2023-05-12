@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v2.20.0
+- 配置修改: 修改配置文件检索方式，使用代码方式启动不再依赖配置文件，需要自己在入口完成所有配置
+- 重构: 根据tslint错误重构压缩器和输出模块代码
+- 修改: handleError支持参数request
+- 修改: 移除 @types/node 开发依赖
+- 修改: 代码方式启动后默认 livereload=false
+- 修改: .d.ts 添加 open 参数，表示服务启动后打开浏览器, 等于命令行的 -O
 ## v2.19.3
 - BUG & Feutre: 修改 `rename` 和 hash相关，所有资源均生成hash
 ## v2.19.2

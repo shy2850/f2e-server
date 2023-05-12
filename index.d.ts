@@ -142,6 +142,8 @@ declare namespace f2eserver {
         /** 默认从2850开始找未使用的端口， 配置后不检测,
          * 当配置端口为443的时候自动转化为 https 服务并需要配置 ssl_options */
         port?: number
+        /** 是否打开浏览器, 依赖本地命令 open 打开 */
+        open?: boolean
         /**
          * ssl 配置
          * 如: { key: string, cert: string }
@@ -216,7 +218,7 @@ declare namespace f2eserver {
          * after server create
          * you can render websocket server via this
          */
-        onServerCreate?: (server: Server) => void
+        onServerCreate?: (server: Server, conf: F2EConfig) => void
         /** 获取环境上下文信息 */
         onContextReady?: (context: { middleware: Middleware, memory: MemoryTree.MemoryTree }) => void
         /**
