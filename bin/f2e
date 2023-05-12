@@ -6,9 +6,9 @@ const base = require('../package.json')
 const IP = require('../lib/util/IP')
 const HOSTS = require('../lib/util/HOSTS')
 const fs = require('fs')
-const { getConfig, setConfig } = require('../lib/conf/F2E_CONFIG')
-
-const F2E_CONFIG = getConfig()
+const { setConfigPath } = require('../lib/conf/F2E_CONFIG')
+const F2E_CONFIG = '.f2econfig.js'
+setConfigPath(F2E_CONFIG)
 program
     .version(base.version)
 
@@ -33,10 +33,10 @@ program
         let beginTime = Date.now() + timeout
         console.log('build begin...')
         if (config) {
-            setConfig(config)
+            setConfigPath(config)
         }
         require('../lib/util/build')(function () {
-            console.log('build finished' + (watch ? '!\n  & building...' : ' with: ' + (Date.now() - beginTime) + 'ms' ))
+            console.log('build finished' + (watch ? '!\n  & building...' : ' with: ' + (Date.now() - beginTime) + 'ms'))
         }, {watch, timeout})
     })
 program
@@ -49,7 +49,7 @@ program
     .description('启动服务器')
     .action(options => {
         if (options.config) {
-            setConfig(options.config)
+            setConfigPath(options.config)
         }
         require('../index')(options)
     })
