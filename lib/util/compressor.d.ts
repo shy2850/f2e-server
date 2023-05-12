@@ -13,8 +13,8 @@ export type PredefinedCompressorType = 'br' | 'gzip' | 'deflate'
 
 export type CompressorType = Compressor | PredefinedCompressorType
 
-export type PredefinedCompressors = Record<PredefinedCompressorType,Compressor<k>>
+export type PredefinedCompressors = Record<PredefinedCompressorType,Compressor>
 
-const predefinedCompressors: PredefinedCompressors
-const getCompressor: (req: IncomingMessage, conf: F2EConfig) => Compressor
+declare const predefinedCompressors: PredefinedCompressors
+declare const getCompressor: (req: IncomingMessage, conf: F2EConfig) => Compressor
 export { predefinedCompressors, getCompressor }
