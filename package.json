@@ -41,7 +41,6 @@
   "typings": "index.d.ts",
   "homepage": "https://github.com/shy2850/f2e-server#readme",
   "devDependencies": {
-    "@types/node": "^7.10.14",
     "clean-css": "^4.2.3",
     "eslint": "^8.39.0",
     "eslint-config-standard": "^10.2.1",
