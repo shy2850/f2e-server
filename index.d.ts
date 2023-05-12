@@ -4,7 +4,7 @@ import { MemoryTree } from "memory-tree"
 import { CompressorType } from "./lib/util/compressor"
 type LessConfig = Less.Options
 
-declare function f2eserver(conf: f2eserver.F2EConfig): void
+declare function f2eserver(...conf: f2eserver.F2EConfig[]): void
 declare namespace f2eserver {
     export interface RequestWith<T = any> extends IncomingMessage {
         /**
@@ -151,14 +151,9 @@ declare namespace f2eserver {
         ssl_options?: https.ServerOptions
         /**
          * 指定host访问生效
-         * @deprecated
+         * 未指定时，只要是访问端口符合就可以，相当于nginx的 servername: _
          */
         host?: string
-        /**
-         * 不指定host访问生效
-         * @deprecated
-         */
-        no_host?: boolean
         /** 开启监听文件修改 */
         watch?: boolean
         /**
@@ -259,7 +254,7 @@ declare namespace f2eserver {
          * 自定义全局解析器
          */
         app?: 'static' | 'memory-tree' | {
-            (conf: F2EConfig): (req: IncomingMessage, resp: ServerResponse) => void
+            (conf: F2EConfig): ((req: IncomingMessage, resp: ServerResponse) => void) | Promise<(req: IncomingMessage, resp: ServerResponse) => void>
         },
 
         /**

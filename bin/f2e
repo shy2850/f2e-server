@@ -47,11 +47,16 @@ program
     .option('-B, --build <build>', 'build with true')
     .option('-O, --open', '打开浏览器')
     .description('启动服务器')
-    .action(options => {
-        if (options.config) {
-            setConfigPath(options.config)
+    .action(({ port, config, host, build, open }) => {
+        if (config) {
+            setConfigPath(config)
         }
-        require('../index')(options)
+        require('../index')({
+            port: port ? Number(port) : undefined,
+            host,
+            build: !!build,
+            open: !!open
+        })
     })
 
 program
