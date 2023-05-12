@@ -1,5 +1,7 @@
 import { Transform } from "stream";
 import { InputType } from "zlib";
+import { IncomingMessage } from 'http';
+import { F2EConfig } from '../../index'
 
 export interface Compressor<E extends string = string> {
     createStream: () => Transform,
@@ -11,6 +13,8 @@ export type PredefinedCompressorType = 'br' | 'gzip' | 'deflate'
 
 export type CompressorType = Compressor | PredefinedCompressorType
 
-export type PredefinedCompressors = {
-    [k in PredefinedCompressorType]: Compressor<k>
-}
+export type PredefinedCompressors = Record<PredefinedCompressorType,Compressor<k>>
+
+const predefinedCompressors: PredefinedCompressors
+const getCompressor: (req: IncomingMessage, conf: F2EConfig) => Compressor
+export { predefinedCompressors, getCompressor }
