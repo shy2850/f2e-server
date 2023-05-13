@@ -6,8 +6,7 @@ const base = require('../package.json')
 const IP = require('../lib/util/IP')
 const HOSTS = require('../lib/util/HOSTS')
 const fs = require('fs')
-const { setConfigPath } = require('../lib/conf/F2E_CONFIG')
-const F2E_CONFIG = '.f2econfig.js'
+const { setConfigPath, F2E_CONFIG } = require('../lib/conf/F2E_CONFIG')
 setConfigPath(F2E_CONFIG)
 program
     .version(base.version)
