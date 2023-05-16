@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.20.6
+- 功能: 新增 `shouldUseCompressor` 过滤是否需要进行gzip等类型压缩的资源
+- 修改: 内置请求扩展属性格式 `rawBody` 修改为 `Buffer`
+- 修改: `max_body_parse_size` 修改为 `shouldUseBodyparser`
 ## v2.20.5
 - 兼容修复: 代码方式配置仍然支持获取默认配置文件配置参数，优先级低于代码级别
 ## v2.20.3

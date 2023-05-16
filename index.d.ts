@@ -14,7 +14,7 @@ declare namespace f2eserver {
         /**
          * 原始请求内容
          */
-        rawBody?: Uint8Array[],
+        rawBody?: Buffer,
         /**
          * POST请求为 application/json 类型时，转换后的参数
          */
@@ -168,6 +168,35 @@ declare namespace f2eserver {
         /** gzip 压缩扩展，支持更多压缩方式 */
         compressors?: CompressorType[]
         /**
+         * 运行时 是否对资源进行 gzip等压缩
+         * 可以根据文件路径、文件大小给出结果
+         * @default function (pathname, min_size) { return isText(pathname) && min_size > 4096 }
+         * @param  {string} pathname 资源路径名
+         * @param  {number} data 资源大小
+         * @return {boolean}
+         */
+        shouldUseCompressor?: (pathname: string, min_size: number) => boolean
+        /**
+         * build 阶段是否使用 terser/uglify/cleanCSS 进行 minify 操作
+         * 可以根据文件路径或者文件内容、大小给出结果
+         * @default function () { return true }
+         * @param  {string} pathname 资源路径名
+         * @param  {MemoryTree.DataBuffer} data     资源内容
+         * @return {boolean}
+         */
+        shouldUseMinify?: (pathname: string, data: MemoryTree.DataBuffer) => boolean
+        /**
+         * post是否进行请求参数封装
+         *   1. 请求头JSON格式， 会执行JSON.parse并将结果赋值于 request.body 上，
+         *   2. 请求头非JSON，会执行表单反序列化转化成对象将结果赋值于 request.post 上
+         *   3. 不封装时，request.rawBody 为原始请求数据， request.body 为原始数据转 utf8 格式字符串
+         * @default function (pathname, max_size) { return isText(pathname) && min_size < 100 * 4096 }
+         * @param {string} pathname 请求路径
+         * @param {number} max_size 请求内容大小
+         * @returns
+         */
+        shouUseBodyParser?: (pathname: string, max_size: number) => boolean
+        /**
          * stream data output size per response
          */
         range_size?: number
@@ -202,14 +231,6 @@ declare namespace f2eserver {
         middlewares?: (MiddlewareCreater | MiddlewareRef)[]
         output?: string
         /**
-         * build 阶段是否使用 uglify/cleanCSS 进行 minify 操作
-         * 可以根据文件路径或者文件内容、大小给出结果
-         * @param  {string} pathname 资源路径名
-         * @param  {MemoryTree.DataBuffer} data     资源内容
-         * @return {boolean}
-         */
-        shouldUseMinify?: (pathname: string, data: MemoryTree.DataBuffer) => boolean
-        /**
          * after server create
          * you can render websocket server via this
          */
@@ -236,11 +257,6 @@ declare namespace f2eserver {
         page_404?: string | PageRender<{ pathname: string }>
         page_50x?: string | PageRender<{ error: Error }>
         page_dir?: string | PageRender<{ pathname: string, dirname: string, store: Object, conf: F2EConfig }>
-
-        /**
-         * 请求body转化为UTF8字符串长度 小于100K时候进行 parse
-         */
-        max_body_parse_size?: number
         /**
          * 所有响应附加响应头信息
          */
