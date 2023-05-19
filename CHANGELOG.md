@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.20.9
+- BUG: 修改识别 port 方案
 ## v2.20.8
 - 修改: 准备页面 page_init 支持配置纯静态HTML文本
 - Typescript: 优化 RequestWith 参数描述
