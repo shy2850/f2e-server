@@ -6,24 +6,25 @@ type LessConfig = Less.Options
 
 declare function f2eserver(...conf: f2eserver.F2EConfig[]): void
 declare namespace f2eserver {
-    export interface RequestWith<T = any> extends IncomingMessage {
+    export interface RequestWith<T extends object = any> extends IncomingMessage {
         /**
          * 请求search参数
          */
-        data: T,
+        data: Record<keyof T, string | string[]>,
         /**
          * 原始请求内容
          */
         rawBody?: Buffer,
         /**
          * POST请求为 application/json 类型时，转换后的参数
+         * 如果不转JSON或者转换失败, 转为utf8编码的字符串
          */
-        body?: T,
+        body?: T extends object ? T : string,
         /**
          * POST请求为 application/x-www-form-urlencoded 类型时，转化后的参数
          * @description <b>不支持文件上传</b>
          */
-        post?: T
+        post?: Record<keyof T, string | string[]>,
     }
     export type SetResult = MemoryTree.DataBuffer | {
         data: MemoryTree.DataBuffer;
@@ -268,9 +269,10 @@ declare namespace f2eserver {
         authorization?: string
 
         /**
-         * 自定义全局解析器
+         * 自定义全局解析器，默认'memory-tree'，不要修改，除非你只打算使用host识别的功能
+         * @deprecated
          */
-        app?: 'static' | 'memory-tree' | {
+        app?: 'memory-tree' | {
             (conf: F2EConfig): ((req: IncomingMessage, resp: ServerResponse) => void) | Promise<(req: IncomingMessage, resp: ServerResponse) => void>
         },
 

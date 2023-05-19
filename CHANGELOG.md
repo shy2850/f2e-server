@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## v2.20.7
+## v2.20.8
 - 修改: 准备页面 page_init 支持配置纯静态HTML文本
+- Typescript: 优化 RequestWith 参数描述
 ## v2.20.6
 - 功能: 新增 `shouldUseCompressor` 过滤是否需要进行gzip等类型压缩的资源
 - 修改: 内置请求扩展属性格式 `rawBody` 修改为 `Buffer`
