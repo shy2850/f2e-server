@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.20.10
+- 严重BUG: shouUseBodyParser 默认错误
 ## v2.20.9
 - BUG: 修改识别 port 方案
 ## v2.20.8

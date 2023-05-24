@@ -191,7 +191,7 @@ declare namespace f2eserver {
          *   1. 请求头JSON格式， 会执行JSON.parse并将结果赋值于 request.body 上，
          *   2. 请求头非JSON，会执行表单反序列化转化成对象将结果赋值于 request.post 上
          *   3. 不封装时，request.rawBody 为原始请求数据， request.body 为原始数据转 utf8 格式字符串
-         * @default function (pathname, max_size) { return isText(pathname) && min_size < 100 * 4096 }
+         * @default function (pathname, max_size) { return min_size < 100 * 4096 }
          * @param {string} pathname 请求路径
          * @param {number} max_size 请求内容大小
          * @returns
