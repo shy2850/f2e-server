@@ -1,23 +1,16 @@
 // @ts-check
-const zlib = require('zlib')
+const createRespUtil = require('f2e-server/lib/util/resp')
+
 /**
  * @type {import('../index').ExecOut}
  */
 const provider = (fn, conf = {}) => (req, resp) => {
-    const { renderHeaders = (h => h) } = conf
-    let out = data => resp.end(JSON.stringify(data))
-    let header = renderHeaders({
-        'Content-Type': 'application/json; charset=utf-8'
-    }, req)
-    if (conf.gzip) {
-        header['Content-Encoding'] = 'gzip'
-        out = data => resp.end(zlib.gzipSync(JSON.stringify(data)))
-    }
-    resp.writeHead(200, header)
-    Promise.resolve(fn(req, resp, conf)).then(out).catch(err => {
+    const RespUtil = createRespUtil(conf)
+    Promise.resolve(fn(req, resp, conf)).then(data => {
+        RespUtil.handleSuccess(req, resp, '.json', data && JSON.stringify(data))
+    }).catch(err => {
         console.log(err)
-        resp.writeHead(500, header)
-        out({ error: err.toString() })
+        RespUtil.handleError(resp, err, req)
     })
     return false
 }

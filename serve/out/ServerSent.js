@@ -7,7 +7,7 @@ const provider = (fn, conf = {
     interval: 1000,
     interval_beat: 30000
 }) => (req, resp) => {
-    const { renderHeaders = (h => h) } = conf
+    const { renderHeaders = h => h } = conf
     resp.writeHead(200, renderHeaders({
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
@@ -18,7 +18,7 @@ const provider = (fn, conf = {
     let interval2
 
     const heartBeat = function heartBeat () {
-        if (resp.writable && !resp.finished) {
+        if (resp.writable && !resp.writableEnded) {
             resp.write(`data:1\n\n`)
             interval1 = setTimeout(heartBeat, conf.interval_beat || 30000)
         }
@@ -27,7 +27,7 @@ const provider = (fn, conf = {
     const loop = async function loop () {
         try {
             const res = await Promise.resolve(fn(req, resp, conf))
-            if (res && resp.writable && !resp.finished) {
+            if (res && resp.writable && !resp.writableEnded) {
                 resp.write(`data:${JSON.stringify(res)}\n\n`)
             }
         } catch (e) {

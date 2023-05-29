@@ -1,27 +1,18 @@
 // @ts-check
-const zlib = require('zlib')
-const mime = require('mime')
-const { URL } = require('url')
+const createRespUtil = require('f2e-server/lib/util/resp')
 
+/**
+ * @param {string} type
+ * @returns {import('../').ExecOut}
+ */
 const provider = (type = 'text/html') => {
-    const mimeType = mime.getType(type) || type
     return (fn, conf = {}) => (req, resp) => {
-        const { renderHeaders = (h => h) } = conf
-        const { pathname } = new URL('http://127.0.0.1' + req.url)
-        const isText = conf.isText(pathname)
-        let out = data => resp.end(data)
-        let header = renderHeaders({
-            'Content-Type': mimeType + (isText ? '; charset=utf-8' : '')
-        }, req)
-        if (conf.gzip && isText) {
-            header['Content-Encoding'] = 'gzip'
-            out = data => resp.end(zlib.gzipSync(data))
-        }
-        resp.writeHead(200, header)
-        Promise.resolve(fn(req, resp, conf)).then(out).catch(err => {
+        const RespUtil = createRespUtil(conf)
+        Promise.resolve(fn(req, resp, conf)).then(data => {
+            RespUtil.handleSuccess(req, resp, type, data)
+        }).catch(err => {
             console.log(err)
-            resp.writeHead(500, header)
-            out(err.toString())
+            RespUtil.handleError(resp, err, req)
         })
         return false
     }
