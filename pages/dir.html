@@ -12,6 +12,20 @@
         .contextmenu { position: absolute; display: none; background: #fff; box-shadow: 3px 3px 15px #999; }
         .contextmenu > a { display: block; padding: 5px 12px; line-height: 20px; }
         .info-bar { position: fixed; left: 1rem; bottom: 1rem; }
+        .uploading {
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            text-align: center;
+            padding-top: 20%;
+            box-sizing: border-box;
+            font: 500 72px/2 Arial;
+            z-index: 9999;
+            background: rgba(0, 0, 0, .3);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -21,22 +35,40 @@
 </ul>
 
 <% if (conf.authorization) { %>
-<div class="info-bar">本页面支持拖拽上传文件(仅支持单文件,不支持文件夹)</div>
+<div class="info-bar">本页面支持拖拽上传文件(仅支持单文件,不支持文件夹)
+    &nbsp; 也可点击上传 <input type="file" />
+</div>
 <div class="contextmenu">
     <a href="javascript:;" class="new_folder">新建文件夹</a>
 </div>
 <script>
 
     const list = document.querySelectorAll('ul li[tabindex="1"]')
-    const Fetch = (url, option) => fetch(url, option).then(res => {
-        if (res.status === 500) {
-            res.text().then(err => {
-                const div = document.createElement('div')
-                div.innerHTML = err
-                alert(div.innerText)
-            })
-        }
-    })
+    /**
+     * @type {HTMLInputElement}
+     **/
+    const input_file = document.querySelector('input[type=file]')
+    const Fetch = (url, option) => {
+        const uploading = document.createElement('div')
+        uploading.classList.add('uploading')
+        uploading.innerText = 'uploading...'
+        document.body.appendChild(uploading)
+        fetch(url, option).then(res => {
+            switch (res.status) {
+                case 500:
+                res.text().then(err => {
+                    const div = document.createElement('div')
+                    div.innerHTML = err
+                    alert(div.innerText)
+                })
+                break;
+                case 200:
+                    setTimeout(() => {
+                        location.reload()
+                    }, 100);
+            }
+        })
+    }
     list.forEach(el => {
         const file = el.innerText.trim()
         el.classList.add('candel')
@@ -53,11 +85,23 @@
         e.preventDefault()
         e.stopPropagation()
         const file = e.dataTransfer.files[0]
-        Fetch('?file=' + file.name, {
-            method: 'PUT',
-            body: file
-        })
+        if (file) {
+            Fetch('?file=' + file.name, {
+                method: 'PUT',
+                body: file
+            })
+        }
     })
+    input_file.addEventListener('change',  function (e) {
+        const file = input_file.files[0]
+        if (file) {
+            Fetch('?file=' + file.name, {
+                method: 'PUT',
+                body: file
+            })
+        }
+    })
+
     document.body.addEventListener('dragover', function (e) {
         e.preventDefault()
     })
@@ -83,7 +127,7 @@
         contextmenu.style.cssText = 'left: ' + e.x + 'px; top: ' + e.y + 'px; display: block;'
         e.preventDefault();
     })
-    
+
 </script>
 <% } %>
 </body>

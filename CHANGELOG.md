@@ -1,5 +1,8 @@
 # CHANGELOG
 
+
+## v2.20.11
+- 优化: 目录页面上传问题修复等
 ## v2.20.10
 - 严重BUG: shouUseBodyParser 默认错误
 ## v2.20.9
