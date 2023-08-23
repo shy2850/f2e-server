@@ -3,8 +3,6 @@
 const path = require('path')
 const program = require('commander')
 const base = require('../package.json')
-const IP = require('../lib/util/IP')
-const HOSTS = require('../lib/util/HOSTS')
 const fs = require('fs')
 const { setConfigPath, F2E_CONFIG } = require('../lib/conf/F2E_CONFIG')
 setConfigPath(F2E_CONFIG)
@@ -14,7 +12,7 @@ program
 program
     .command('conf')
     .description(`生成 ${F2E_CONFIG} 配置文件模板`)
-    .action(options => {
+    .action(() => {
         fs.readFile(path.join(__dirname, '../', F2E_CONFIG), function (err, data) {
             !err && fs.writeFile(path.resolve(F2E_CONFIG), data.toString().replace(`import('./index')`, `import('f2e-server')`), function (err) {
                 err && console.log(err)
@@ -59,15 +57,13 @@ program
     })
 
 program
-    .command('ip')
-    .description('获取本地IP')
-    .action(options => console.log(IP))
-
-program
-    .command('host')
-    .description('加入host映射')
-    .action(options => {
-        HOSTS(options)
+    .command('create <appname>')
+    .description('一键创建项目模板')
+    .action(function (appname = 'myApp') {
+        require('child_process')
+            .exec(`git clone https://gitee.com/f2e-server/f2e-react-app.git ${appname}`, function () {
+                console.log('初始化完成！')
+            })
     })
 
 // 开始解析用户输入的命令
