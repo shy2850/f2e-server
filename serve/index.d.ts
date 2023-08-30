@@ -2,31 +2,31 @@ import { IncomingMessage, ServerResponse } from "http"
 import { F2EConfig, RequestWith } from 'f2e-server'
 import { MemoryTree } from "memory-tree"
 
-export interface ExecFn {
-    (req: RequestWith, resp: ServerResponse, pathname?: string, memory?: MemoryTree.Store): any
+type onRoute = Required<F2EConfig>['onRoute']
+
+export interface ExecFn<T extends object = any> {
+    (req: RequestWith<T>, resp: ServerResponse, pathname?: string, memory?: MemoryTree.Store): ReturnType<onRoute>
 }
-export interface Callback<T = any> {
-    (req?: RequestWith, resp?: ServerResponse, conf?: F2EConfig): T | Promise<T>
+export interface ServerAPI<T extends object = object, F = any> {
+    (req: RequestWith<T>, resp: ServerResponse): F
 }
 export interface BaseOutConfig extends Partial<F2EConfig> {
     interval?: number
     interval_beat?: number
 }
-export interface ExecOut {
-    (fn: Callback, conf?: BaseOutConfig): ExecFn
+export interface ExecOut<T extends object = object, F = any> {
+    (fn: ServerAPI<T, F>, conf?: BaseOutConfig): ExecFn<T>
 }
 
-export interface Out {
-    Base: (type: string) => ExecOut
-    JsonOut: ExecOut
-    JsonpOut: ExecOut
-    ServerSent: ExecOut
+export interface Out<T extends object = any> {
+    Base: (type: string) => ExecOut<T>
+    JsonOut: ExecOut<T>
+    JsonpOut: ExecOut<T>
+    ServerSent: ExecOut<T>
 }
 
 export class Route {
-    execute: {
-        (pathname: string, req: IncomingMessage, res: ServerResponse, memory?: MemoryTree.Store): any
-    }
+    execute: onRoute
     on: {
         (reg: string | RegExp, exec: ExecFn): void
     }

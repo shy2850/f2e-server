@@ -46,7 +46,7 @@ declare namespace f2eserver {
          * on request end
          */
         onRoute?: {
-            (pathname: string, req: IncomingMessage, resp: ServerResponse, store?: MemoryTree.Store): string | false | void | Promise<string | false | void>
+            <T extends object>(pathname: string, req: RequestWith<T>, resp: ServerResponse, store?: MemoryTree.Store): string | false | void | Promise<string | false | void>
         }
         /**
          * on file change

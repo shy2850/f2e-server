@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## v2.20.13
+- Typescript: 优化 `onRoute` 参数定义
 ## v2.20.12
 - cli: 修改cli命令提供一键生成模板
 ## v2.20.11
